@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2fa0dcn3xjk0"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_bmvha"]
+[ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="2_2mu41"]
+[ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="3_j7ypv"]
+[ext_resource type="Texture2D" uid="uid://ct56r1upx31ce" path="res://icon.svg" id="4_uetb1"]
+
+[node name="Test" type="Node2D"]
+script = ExtResource("1_bmvha")
+
+[node name="MidiPlayer" parent="." instance=ExtResource("2_2mu41")]
+file = "res://Tetris - Tetris Main Theme.mid"
+playing = true
+soundfont = "res://SpanishClassicalGuitar-SF2-20190618/SpanishClassicalGuitar-20190618.sf2"
+
+[node name="ADSR" parent="." instance=ExtResource("3_j7ypv")]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(967, 559)
+texture = ExtResource("4_uetb1")
+
+[connection signal="midi_event" from="MidiPlayer" to="." method="_on_midi_player_midi_event"]

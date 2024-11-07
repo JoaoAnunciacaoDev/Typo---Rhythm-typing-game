@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2fa0dcn3xjk0"]
-
-[ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="1_tgjro"]
-
-[node name="Game" type="Node2D"]
-
-[node name="MidiPlayer" parent="." instance=ExtResource("1_tgjro")]
