@@ -35,6 +35,6 @@ func hit():
 func miss():
 	state = "miss"
 	
-func _on_area_detect_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+func _on_area_detect_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	if area.name == "missArea": # Talvez seja desnecessário, mas implementei para garantir que ao passar de certo ponto é considerado erro
 		missed = true

@@ -19,7 +19,7 @@ file = "res://Sounds/tetrisTheme.mid"
 soundfont = "res://Sounds/SpanishClassicalGuitar-SF2-20190618/SpanishClassicalGuitar-20190618.sf2"
 
 [node name="MidiQueue" parent="." instance=ExtResource("2_2mu41")]
-file = "res://tetrisTheme.mid"
+file = "res://Sounds/tetrisTheme.mid"
 
 [node name="ADSR" parent="." instance=ExtResource("3_j7ypv")]
 
