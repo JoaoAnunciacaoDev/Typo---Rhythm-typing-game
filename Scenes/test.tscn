@@ -15,7 +15,7 @@ size = Vector2(740, 93)
 script = ExtResource("1_bmvha")
 
 [node name="MidiPlayer" parent="." instance=ExtResource("2_2mu41")]
-file = "res://tetrisTheme.mid"
+file = "res://Sounds/tetrisTheme.mid"
 soundfont = "res://Sounds/SpanishClassicalGuitar-SF2-20190618/SpanishClassicalGuitar-20190618.sf2"
 
 [node name="MidiQueue" parent="." instance=ExtResource("2_2mu41")]
