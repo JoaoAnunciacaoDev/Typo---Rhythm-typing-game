@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://crhjesjmdm3ko"]
+
+[ext_resource type="Script" path="res://Scripts/keys.gd" id="1_ymbmv"]
+[ext_resource type="Texture2D" uid="uid://gabgg70ahg1g" path="res://Assets/arrowUpt.png" id="2_3wtu1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f226f"]
+font_size = 32
+
+[node name="arrowUp" type="Node2D" node_paths=PackedStringArray("Message")]
+script = ExtResource("1_ymbmv")
+key = "up"
+Message = NodePath("Message")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("2_3wtu1")
+
+[node name="Message" type="Label" parent="."]
+visible = false
+offset_left = -82.0
+offset_top = -116.0
+offset_right = 83.0
+offset_bottom = -71.0
+text = "L_Message
+"
+label_settings = SubResource("LabelSettings_f226f")
+horizontal_alignment = 1

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpoiyfvey0ga8"]
+
+[ext_resource type="Script" path="res://Scripts/midi_note.gd" id="1_3bpcx"]
+[ext_resource type="Texture2D" uid="uid://ct56r1upx31ce" path="res://icon.svg" id="1_xrai7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nndsg"]
+size = Vector2(120, 68)
+
+[node name="MidiNote" type="Sprite2D"]
+texture = ExtResource("1_xrai7")
+script = ExtResource("1_3bpcx")
+
+[node name="areaDetect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_nndsg")
+
+[connection signal="area_shape_entered" from="areaDetect" to="." method="_on_area_detect_area_shape_entered"]
