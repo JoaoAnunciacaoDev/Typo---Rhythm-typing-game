@@ -200,4 +200,3 @@ func _update_volume( ) -> void:
 	else:
 		v = maxf( -80.0, linear_to_db( db_to_linear( v ) / self.polyphony_count ) )
 		self.volume_db = v
-
