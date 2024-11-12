@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gabgg70ahg1g"
-path="res://.godot/imported/arrowUpt.png-9c254bc9c6dcc4699d64849227131eab.ctex"
+uid="uid://bxpxeis0badxw"
+path="res://.godot/imported/trails.png-45fe16b7db87699c55a2bfcfeeac92d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/arrowUpt.png"
-dest_files=["res://.godot/imported/arrowUpt.png-9c254bc9c6dcc4699d64849227131eab.ctex"]
+source_file="res://Assets/trails.png"
+dest_files=["res://.godot/imported/trails.png-45fe16b7db87699c55a2bfcfeeac92d1.ctex"]
 
 [params]
 

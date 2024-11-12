@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://c6sfloc0svgao"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_pt1rt"]
+[ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="2_34jyv"]
+[ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="3_4bmeg"]
+[ext_resource type="AudioStream" uid="uid://bwnsvevfmvklu" path="res://Sounds/Muranga/murangaTheme.mp3" id="4_my7b5"]
+[ext_resource type="PackedScene" uid="uid://bxjhofwi2apcq" path="res://Scenes/keys/s_key.tscn" id="4_p3otg"]
+[ext_resource type="PackedScene" uid="uid://0hmkdkkuw05d" path="res://Scenes/keys/d_key.tscn" id="5_7hfg2"]
+[ext_resource type="PackedScene" uid="uid://b5rxv8lhgmi4c" path="res://Scenes/keys/f_key.tscn" id="6_y171x"]
+[ext_resource type="PackedScene" uid="uid://qot5mj5ucggk" path="res://Scenes/keys/j_key.tscn" id="7_1l3el"]
+[ext_resource type="PackedScene" uid="uid://b3g5s701o3vdj" path="res://Scenes/keys/k_key.tscn" id="8_5trrw"]
+[ext_resource type="PackedScene" uid="uid://bs6vy353a22wp" path="res://Scenes/keys/l_key.tscn" id="9_cmqxw"]
+[ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="11_4pmer"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
+size = Vector2(1918, 93)
+
+[node name="MurangaTema" type="Node2D"]
+script = ExtResource("1_pt1rt")
+
+[node name="Camera2D" parent="." instance=ExtResource("11_4pmer")]
+
+[node name="buttons" type="Node2D" parent="."]
+position = Vector2(-25, 0)
+
+[node name="s_Key" parent="buttons" instance=ExtResource("4_p3otg")]
+position = Vector2(277, 900)
+
+[node name="d_Key" parent="buttons" instance=ExtResource("5_7hfg2")]
+position = Vector2(511, 900)
+
+[node name="f_Key" parent="buttons" instance=ExtResource("6_y171x")]
+position = Vector2(745, 900)
+
+[node name="j_Key" parent="buttons" instance=ExtResource("7_1l3el")]
+position = Vector2(1203, 900)
+
+[node name="k_Key" parent="buttons" instance=ExtResource("8_5trrw")]
+position = Vector2(1437, 900)
+
+[node name="l_Key" parent="buttons" instance=ExtResource("9_cmqxw")]
+position = Vector2(1671, 900)
+
+[node name="notes" type="Node2D" parent="."]
+
+[node name="missArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="missArea"]
+position = Vector2(960, 1094)
+shape = SubResource("RectangleShape2D_h8h1u")
+
+[node name="MidiPlayer" parent="." instance=ExtResource("2_34jyv")]
+file = "res://Sounds/Muranga/murangaMelodiaPrincipal.mid"
+volume_db = 0.0
+soundfont = "res://Sounds/SpanishClassicalGuitar-SF2-20190618/SpanishClassicalGuitar-20190618.sf2"
+bus = &"Melodias"
+sequence_per_seconds = 140
+
+[node name="MidiQueue" parent="." instance=ExtResource("2_34jyv")]
+file = "res://Sounds/Muranga/murangaMelodiaPrincipal.mid"
+sequence_per_seconds = 140
+
+[node name="ADSR" parent="." instance=ExtResource("3_4bmeg")]
+stream = ExtResource("4_my7b5")
+bus = &"Músicas"
+
+[node name="beatTime" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
+[connection signal="midi_event" from="MidiQueue" to="." method="_on_midi_queue_midi_event"]

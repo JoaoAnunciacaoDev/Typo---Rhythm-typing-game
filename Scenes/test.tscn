@@ -1,47 +1,66 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2fa0dcn3xjk0"]
+[gd_scene load_steps=12 format=3 uid="uid://d2fa0dcn3xjk0"]
 
-[ext_resource type="Script" path="res://Scripts/game.gd" id="1_bmvha"]
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_pc8dr"]
 [ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="2_2mu41"]
 [ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="3_j7ypv"]
-[ext_resource type="PackedScene" uid="uid://7ctfeqd5vaa7" path="res://Scenes/arrow_down.tscn" id="5_xpw3i"]
-[ext_resource type="PackedScene" uid="uid://cyttcfg0rsyqm" path="res://Scenes/arrow_left.tscn" id="6_c252s"]
-[ext_resource type="PackedScene" uid="uid://b3wc6jgu3fil7" path="res://Scenes/arrow_right.tscn" id="7_6x225"]
-[ext_resource type="PackedScene" uid="uid://crhjesjmdm3ko" path="res://Scenes/arrow_up.tscn" id="8_vudtr"]
+[ext_resource type="PackedScene" uid="uid://bxjhofwi2apcq" path="res://Scenes/keys/s_key.tscn" id="4_parqu"]
+[ext_resource type="PackedScene" uid="uid://0hmkdkkuw05d" path="res://Scenes/keys/d_key.tscn" id="5_6vygc"]
+[ext_resource type="PackedScene" uid="uid://b5rxv8lhgmi4c" path="res://Scenes/keys/f_key.tscn" id="6_m60uy"]
+[ext_resource type="PackedScene" uid="uid://qot5mj5ucggk" path="res://Scenes/keys/j_key.tscn" id="7_t2gsa"]
+[ext_resource type="PackedScene" uid="uid://b3g5s701o3vdj" path="res://Scenes/keys/k_key.tscn" id="8_n3pep"]
+[ext_resource type="PackedScene" uid="uid://bs6vy353a22wp" path="res://Scenes/keys/l_key.tscn" id="9_t6n0j"]
+[ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="10_xvwj3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
-size = Vector2(740, 93)
+size = Vector2(1918, 93)
 
 [node name="Test" type="Node2D"]
-script = ExtResource("1_bmvha")
+script = ExtResource("1_pc8dr")
+
+[node name="Camera2D" parent="." instance=ExtResource("10_xvwj3")]
+
+[node name="buttons" type="Node2D" parent="."]
+position = Vector2(-25, 0)
+
+[node name="s_Key" parent="buttons" instance=ExtResource("4_parqu")]
+position = Vector2(277, 900)
+
+[node name="d_Key" parent="buttons" instance=ExtResource("5_6vygc")]
+position = Vector2(511, 900)
+
+[node name="f_Key" parent="buttons" instance=ExtResource("6_m60uy")]
+position = Vector2(745, 900)
+
+[node name="j_Key" parent="buttons" instance=ExtResource("7_t2gsa")]
+position = Vector2(1203, 900)
+
+[node name="k_Key" parent="buttons" instance=ExtResource("8_n3pep")]
+position = Vector2(1437, 900)
+
+[node name="l_Key" parent="buttons" instance=ExtResource("9_t6n0j")]
+position = Vector2(1671, 900)
+
+[node name="notes" type="Node2D" parent="."]
+
+[node name="missArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="missArea"]
+position = Vector2(960, 1094)
+shape = SubResource("RectangleShape2D_h8h1u")
 
 [node name="MidiPlayer" parent="." instance=ExtResource("2_2mu41")]
 file = "res://Sounds/tetrisTheme.mid"
 soundfont = "res://Sounds/SpanishClassicalGuitar-SF2-20190618/SpanishClassicalGuitar-20190618.sf2"
+bus = &"Melodias"
 
 [node name="MidiQueue" parent="." instance=ExtResource("2_2mu41")]
 file = "res://Sounds/tetrisTheme.mid"
 
 [node name="ADSR" parent="." instance=ExtResource("3_j7ypv")]
 
-[node name="arrows" type="Node2D" parent="."]
+[node name="beatTime" type="Timer" parent="."]
+one_shot = true
 
-[node name="arrowDown" parent="arrows" instance=ExtResource("5_xpw3i")]
-position = Vector2(861, 961)
-
-[node name="arrowLeft" parent="arrows" instance=ExtResource("6_c252s")]
-position = Vector2(669, 961)
-
-[node name="arrowRight" parent="arrows" instance=ExtResource("7_6x225")]
-position = Vector2(1201, 961)
-
-[node name="arrowUp" parent="arrows" instance=ExtResource("8_vudtr")]
-position = Vector2(1008, 961)
-
-[node name="missArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="missArea"]
-position = Vector2(924, 1094)
-shape = SubResource("RectangleShape2D_h8h1u")
-
-[connection signal="midi_event" from="MidiQueue" to="." method="_on_midi_player_2_midi_event"]
-[connection signal="area_shape_entered" from="missArea" to="." method="_on_miss_area_area_shape_entered"]
+[connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
+[connection signal="midi_event" from="MidiQueue" to="." method="_on_midi_queue_midi_event"]
+[connection signal="timeout" from="beatTime" to="." method="_on_beat_time_timeout"]

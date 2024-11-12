@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5rxv8lhgmi4c"]
+
+[ext_resource type="Script" path="res://Scripts/keys.gd" id="1_8ef6g"]
+[ext_resource type="Texture2D" uid="uid://broeuieppu0ni" path="res://Assets/key/f.png" id="2_ugg4c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_viegv"]
+line_spacing = 24.0
+
+[node name="f_Key" type="Node2D" node_paths=PackedStringArray("Message")]
+scale = Vector2(7, 7)
+script = ExtResource("1_8ef6g")
+key = "f"
+Message = NodePath("Message")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 10)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_ugg4c")
+
+[node name="Message" type="Label" parent="."]
+offset_left = -10.0
+offset_top = -16.0
+offset_right = 30.0
+offset_bottom = 7.0
+scale = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_viegv")

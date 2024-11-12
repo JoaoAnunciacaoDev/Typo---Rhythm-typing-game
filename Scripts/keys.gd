@@ -14,10 +14,10 @@ func _input(_event):
 	if Input.is_action_just_released(key):
 		pressed = false
 
-func _process(delta):
+func _process(delta):	
 	if pressed:
-		scale.y = lerp(scale.y, 0.95, 1.0)
-		scale.x = lerp(scale.x, 0.95, 1.0)
+		scale.y = lerp(scale.y, 6.0, 1.0)
+		scale.x = lerp(scale.x, 6.0, 1.0)
 	else:
-		scale.y = lerp(scale.y, 1.0, delta * 1.0)
-		scale.x = lerp(scale.x, 1.0, delta * 1.0)
+		scale.y = lerp(scale.y, 7.0, delta * 7.0)
+		scale.x = lerp(scale.x, 7.0, delta * 7.0)
