@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6sfloc0svgao"]
+[gd_scene load_steps=15 format=3 uid="uid://c6sfloc0svgao"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_sbvj6"]
 [ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="2_qx811"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://bs6vy353a22wp" path="res://Scenes/keys/l_key.tscn" id="8_yeoub"]
 [ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="9_ahg3o"]
 [ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="10_tlx71"]
-[ext_resource type="PackedScene" uid="uid://so1cemjy66sg" path="res://Scenes/text_animated.tscn" id="11_v86ju"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
 size = Vector2(1918, 93)
@@ -45,6 +44,7 @@ notes = NodePath("notes")
 [node name="Camera2D" parent="." instance=ExtResource("2_qx811")]
 
 [node name="buttons" type="Node2D" parent="."]
+z_index = -1
 position = Vector2(-25, 0)
 
 [node name="s_Key" parent="buttons" instance=ExtResource("3_tyv71")]
@@ -111,8 +111,6 @@ scale = Vector2(1.5, 1)
 amount = 120
 process_material = SubResource("ParticleProcessMaterial_au0s8")
 lifetime = 6.0
-
-[node name="text_animated" parent="." instance=ExtResource("11_v86ju")]
 
 [connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
 [connection signal="finished" from="MidiPlayer2" to="." method="_on_midi_player_finished"]

@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://tstpoxs2oyqv"]
+[gd_scene load_steps=5 format=3 uid="uid://tstpoxs2oyqv"]
 
 [ext_resource type="Script" path="res://MainMenu/lvl_select_menu.gd" id="1_5j35g"]
-[ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="1_31hja"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ocp3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -28,9 +27,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5j35g")
 
-[node name="Background" parent="." instance=ExtResource("1_31hja")]
-
 [node name="CenterContainer" type="CenterContainer" parent="."]
+z_index = -1
 layout_mode = 0
 offset_left = 172.0
 offset_top = 91.0
@@ -41,11 +39,13 @@ offset_bottom = 1017.0
 layout_mode = 2
 
 [node name="fase1" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_j2h0i")
 theme_override_font_sizes/font_size = 69
-text = "Muranga  "
+text = "Muranga"
+alignment = 0
 
 [node name="fase2" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2

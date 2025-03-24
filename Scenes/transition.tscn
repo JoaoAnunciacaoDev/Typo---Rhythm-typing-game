@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3k7c4qkutagm"]
+[gd_scene load_steps=9 format=3 uid="uid://c3k7c4qkutagm"]
 
 [ext_resource type="Shader" path="res://Scripts/transition.gdshader" id="1_dnhfh"]
 [ext_resource type="Script" path="res://Scripts/transition.gd" id="1_hlji0"]
+[ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="3_7yksb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xa86y"]
 shader = ExtResource("1_dnhfh")
@@ -15,20 +16,6 @@ shader_parameter/circle_size = 1.5
 shader_parameter/curtains = 1.0
 shader_parameter/type = 1
 
-[sub_resource type="Animation" id="Animation_q4txn"]
-resource_name = "fade_in"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Fill:material:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-
 [sub_resource type="Animation" id="Animation_wyuuc"]
 length = 0.001
 tracks/0/type = "bezier"
@@ -41,6 +28,20 @@ tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_q4txn"]
+resource_name = "fade_in"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fill:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
 
 [sub_resource type="Animation" id="Animation_d0ehc"]
@@ -72,14 +73,20 @@ material = SubResource("ShaderMaterial_xa86y")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 148.0
+offset_top = 70.0
+offset_right = 1547.0
+offset_bottom = 1033.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 color = Color(0, 0, 0, 1)
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_oqkt8")
 }
-autoplay = "fade_in"
+
+[node name="Background" parent="." instance=ExtResource("3_7yksb")]
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

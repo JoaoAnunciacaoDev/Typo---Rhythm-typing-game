@@ -19,6 +19,7 @@ func _ready() -> void:
 	if name == "Tutorial":
 		config_path = "res://songData/Tutorial.cfg"
 	elif name == "Tetris":
+		note = preload("res://Scenes/mechanics/midi_note_tetris.tscn")
 		config_path = "res://songData/Tetris.cfg"
 		selected_Channel = 0
 	elif name == "MurangaTema":
@@ -52,6 +53,8 @@ func _ready() -> void:
 			state[note_num]["queue"] = config_file.get_value("Data", key)
 		elif "/node" in key:
 			state[note_num]["node"] = get_node(config_file.get_value("Data", key))
+	
+	Transition.play_fade_out()
 
 func _physics_process(delta: float) -> void:
 	delta_sum += delta
@@ -62,7 +65,6 @@ func _physics_process(delta: float) -> void:
 	if delta_sum >= 3.85 and not startSong["second"]: # Após certo tempo o midiplayer responsável pelos sons das notas que o jogador vai tocar inicia
 		startSong["second"] = true
 		get_tree().call_group("midiSong", "play")
-		adsr.play()
 	
 	for elem in state.values():
 		if Input.is_action_just_pressed(elem.key): # No momento que o jogador pressionar uma tecla
@@ -81,7 +83,7 @@ func _physics_process(delta: float) -> void:
 func msgErrorOrNot(texto, perfomance):
 	if perfomance:
 		texto.set_text("Acertou")
-		midi_player.volume_db = -20
+		midi_player.volume_db = db_to_linear(AudioServer.get_bus_volume_db(0))
 	else:
 		texto.set_text("Errou")
 		midi_player.volume_db = -80
@@ -108,4 +110,5 @@ func queue_midi_note(ev):
 		elem.queue.push_back(n)
 
 func _on_midi_player_finished() -> void:
-	get_tree().quit()
+	Transition.next_scene = "res://MainMenu/LvlSelectMenu.tscn"
+	Transition.play_fade_in()

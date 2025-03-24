@@ -1,6 +1,13 @@
 extends Node2D
 
 @export var next_scene : String
+@onready var anim: AnimationPlayer = $anim
+
+func play_fade_in():
+	anim.play("fade_in")
+
+func play_fade_out():
+	anim.play("fade_out")
 
 func _on_anim_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_in":

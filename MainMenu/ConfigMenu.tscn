@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://dyr4sddulkbac"]
+[gd_scene load_steps=15 format=3 uid="uid://dyr4sddulkbac"]
 
 [ext_resource type="Script" path="res://MainMenu/config_menu.gd" id="1_lbad6"]
-[ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="2_25oa0"]
 [ext_resource type="Script" path="res://MainMenu/h_slider.gd" id="3_307bm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4a3aw"]
@@ -84,9 +83,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lbad6")
 
-[node name="Background" parent="." instance=ExtResource("2_25oa0")]
-
 [node name="CenterContainer" type="CenterContainer" parent="."]
+z_index = -1
 layout_mode = 0
 offset_left = 170.0
 offset_top = 96.0
@@ -106,7 +104,9 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 2
 theme = SubResource("Theme_2qh16")
+value = 100.0
 script = ExtResource("3_307bm")
+bus_name = "Master"
 
 [node name="FullScreenCheckBox" type="CheckButton" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -126,6 +126,5 @@ theme = SubResource("Theme_n7grb")
 theme_override_font_sizes/font_size = 35
 text = "Voltar"
 
-[connection signal="value_changed" from="CenterContainer/VBoxContainer/HSlider" to="CenterContainer/VBoxContainer/HSlider" method="_on_value_changed"]
 [connection signal="toggled" from="CenterContainer/VBoxContainer/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Voltar" to="." method="_on_voltar_pressed"]
