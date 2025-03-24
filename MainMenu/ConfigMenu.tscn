@@ -1,0 +1,131 @@
+[gd_scene load_steps=16 format=3 uid="uid://dyr4sddulkbac"]
+
+[ext_resource type="Script" path="res://MainMenu/config_menu.gd" id="1_lbad6"]
+[ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="2_25oa0"]
+[ext_resource type="Script" path="res://MainMenu/h_slider.gd" id="3_307bm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4a3aw"]
+font_size = 30
+font_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="Theme" id="Theme_2qh16"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w41b8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="Theme" id="Theme_6lalw"]
+CheckButton/colors/font_color = Color(0.360784, 0.552941, 0.32549, 1)
+CheckButton/styles/normal = SubResource("StyleBoxFlat_w41b8")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etq20"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy0px"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b073j"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0fei"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4miby"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5qfj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b81jb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="Theme" id="Theme_n7grb"]
+Button/colors/font_color = Color(0.360784, 0.552941, 0.32549, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_w0fei")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_4miby")
+Button/styles/normal = SubResource("StyleBoxFlat_f5qfj")
+Button/styles/pressed = SubResource("StyleBoxFlat_b81jb")
+
+[node name="ConfigMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lbad6")
+
+[node name="Background" parent="." instance=ExtResource("2_25oa0")]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 96.0
+offset_right = 1534.0
+offset_bottom = 1020.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+label_settings = SubResource("LabelSettings_4a3aw")
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme = SubResource("Theme_2qh16")
+script = ExtResource("3_307bm")
+
+[node name="FullScreenCheckBox" type="CheckButton" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_6lalw")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_etq20")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cy0px")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b073j")
+text = "Tela Cheia  "
+alignment = 1
+
+[node name="Voltar" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_n7grb")
+theme_override_font_sizes/font_size = 35
+text = "Voltar"
+
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/HSlider" to="CenterContainer/VBoxContainer/HSlider" method="_on_value_changed"]
+[connection signal="toggled" from="CenterContainer/VBoxContainer/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Voltar" to="." method="_on_voltar_pressed"]

@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://dql1ckqnbriig"]
+
+[ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="1_cooo0"]
+[ext_resource type="Script" path="res://MainMenu/main_menu.gd" id="1_s2c1j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xpes"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6wqtf"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_qlcm4"]
+Button/colors/font_color = Color(0.360784, 0.552941, 0.32549, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_3xpes")
+Button/styles/normal = SubResource("StyleBoxFlat_6wqtf")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s2c1j")
+
+[node name="Background" parent="." instance=ExtResource("1_cooo0")]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 91.0
+offset_right = 1515.0
+offset_bottom = 1017.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Jogar" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_qlcm4")
+theme_override_font_sizes/font_size = 69
+text = "Jogar"
+
+[node name="Config" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_qlcm4")
+theme_override_font_sizes/font_size = 69
+text = "Configurações  "
+
+[node name="Sair" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_qlcm4")
+theme_override_font_sizes/font_size = 69
+text = "Sair"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Jogar" to="." method="_on_jogar_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Config" to="." method="_on_config_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Sair" to="." method="_on_sair_pressed"]
