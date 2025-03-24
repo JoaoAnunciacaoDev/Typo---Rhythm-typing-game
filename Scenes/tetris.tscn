@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2fa0dcn3xjk0"]
+[gd_scene load_steps=13 format=3 uid="uid://d2fa0dcn3xjk0"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_pc8dr"]
 [ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="2_2mu41"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://b3g5s701o3vdj" path="res://Scenes/keys/k_key.tscn" id="8_n3pep"]
 [ext_resource type="PackedScene" uid="uid://bs6vy353a22wp" path="res://Scenes/keys/l_key.tscn" id="9_t6n0j"]
 [ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="10_xvwj3"]
-[ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="11_7lq2l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
 size = Vector2(1918, 93)
@@ -66,8 +65,6 @@ bus = &"Melodias"
 file = "res://Sounds/tetrisTheme.mid"
 
 [node name="ADSR" parent="." instance=ExtResource("3_j7ypv")]
-
-[node name="Background" parent="." instance=ExtResource("11_7lq2l")]
 
 [connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
 [connection signal="midi_event" from="MidiQueue" to="." method="_on_midi_queue_midi_event"]

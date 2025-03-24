@@ -1,7 +1,7 @@
 extends Camera2D
 
 const shakeFade : float = 9.0
-const InitialStrength : float = 30.0
+const InitialStrength : float = 20.0
 
 var shakeStrength : float = 0.0
 

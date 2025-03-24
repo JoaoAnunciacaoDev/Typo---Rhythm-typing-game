@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkjpadkhggrx3"]
+[gd_scene load_steps=5 format=3 uid="uid://dkjpadkhggrx3"]
 
 [ext_resource type="Texture2D" uid="uid://n5qmie0x8fu7" path="res://Assets/bg_screen.png" id="1_yrxfq"]
 [ext_resource type="PackedScene" uid="uid://bvmmldh1s40y4" path="res://Scenes/crt.tscn" id="2_4dwwa"]
 [ext_resource type="Texture2D" uid="uid://bd6fjwtjby5kb" path="res://Assets/bg.png" id="2_j7tlh"]
+[ext_resource type="Texture2D" uid="uid://cxi0ymuqgxe24" path="res://Assets/bg_top.png" id="4_vxjb5"]
 
 [node name="Background" type="Node2D"]
 
@@ -22,3 +23,21 @@ z_index = 1
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("2_j7tlh")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = 1
+offset_left = -3.0
+offset_top = -185.0
+offset_right = 1917.0
+offset_bottom = 15.0
+texture = ExtResource("4_vxjb5")
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = 1
+offset_left = -3.0
+offset_top = 1075.0
+offset_right = 1917.0
+offset_bottom = 1275.0
+texture = ExtResource("4_vxjb5")

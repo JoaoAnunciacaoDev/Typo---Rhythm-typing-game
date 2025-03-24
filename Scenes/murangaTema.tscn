@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6sfloc0svgao"]
+[gd_scene load_steps=12 format=3 uid="uid://c6sfloc0svgao"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_sbvj6"]
 [ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="2_qx811"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://bs6vy353a22wp" path="res://Scenes/keys/l_key.tscn" id="8_yeoub"]
 [ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="9_ahg3o"]
 [ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="10_tlx71"]
-[ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="11_c56jw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
 size = Vector2(1918, 93)
@@ -84,8 +83,6 @@ sequence_per_seconds = 140
 
 [node name="ADSR" parent="." instance=ExtResource("10_tlx71")]
 bus = &"Músicas"
-
-[node name="Background" parent="." instance=ExtResource("11_c56jw")]
 
 [connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
 [connection signal="finished" from="MidiPlayer2" to="." method="_on_midi_player_finished"]
