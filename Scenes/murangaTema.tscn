@@ -1,0 +1,94 @@
+[gd_scene load_steps=13 format=3 uid="uid://c6sfloc0svgao"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_sbvj6"]
+[ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="2_qx811"]
+[ext_resource type="PackedScene" uid="uid://bxjhofwi2apcq" path="res://Scenes/keys/s_key.tscn" id="3_tyv71"]
+[ext_resource type="PackedScene" uid="uid://0hmkdkkuw05d" path="res://Scenes/keys/d_key.tscn" id="4_x5prw"]
+[ext_resource type="PackedScene" uid="uid://b5rxv8lhgmi4c" path="res://Scenes/keys/f_key.tscn" id="5_1cxof"]
+[ext_resource type="PackedScene" uid="uid://qot5mj5ucggk" path="res://Scenes/keys/j_key.tscn" id="6_8ts0i"]
+[ext_resource type="PackedScene" uid="uid://b3g5s701o3vdj" path="res://Scenes/keys/k_key.tscn" id="7_cr2eo"]
+[ext_resource type="PackedScene" uid="uid://bs6vy353a22wp" path="res://Scenes/keys/l_key.tscn" id="8_yeoub"]
+[ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="9_ahg3o"]
+[ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="10_tlx71"]
+[ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="11_c56jw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
+size = Vector2(1918, 93)
+
+[node name="MurangaTema" type="Node2D" node_paths=PackedStringArray("midi_player", "midi_queue", "adsr", "camera", "notes")]
+script = ExtResource("1_sbvj6")
+midi_player = NodePath("MidiPlayer")
+midi_queue = NodePath("MidiQueue")
+adsr = NodePath("ADSR")
+camera = NodePath("Camera2D")
+notes = NodePath("notes")
+
+[node name="Camera2D" parent="." instance=ExtResource("2_qx811")]
+
+[node name="buttons" type="Node2D" parent="."]
+position = Vector2(-25, 0)
+
+[node name="s_Key" parent="buttons" instance=ExtResource("3_tyv71")]
+position = Vector2(298, 900)
+
+[node name="d_Key" parent="buttons" instance=ExtResource("4_x5prw")]
+position = Vector2(509, 900)
+
+[node name="f_Key" parent="buttons" instance=ExtResource("5_1cxof")]
+position = Vector2(720, 900)
+
+[node name="j_Key" parent="buttons" instance=ExtResource("6_8ts0i")]
+position = Vector2(1010, 900)
+
+[node name="k_Key" parent="buttons" instance=ExtResource("7_cr2eo")]
+position = Vector2(1226, 900)
+
+[node name="l_Key" parent="buttons" instance=ExtResource("8_yeoub")]
+position = Vector2(1444, 900)
+
+[node name="notes" type="Node2D" parent="."]
+
+[node name="missArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="missArea"]
+position = Vector2(960, 1094)
+shape = SubResource("RectangleShape2D_h8h1u")
+
+[node name="MidiPlayer" parent="." groups=["midiSong"] instance=ExtResource("9_ahg3o")]
+file = "res://Sounds/Muranga/murangaMelodiaPrincipal.mid"
+volume_db = 0.0
+soundfont = "res://Sounds/SpanishClassicalGuitar-SF2-20190618/SpanishClassicalGuitar-20190618.sf2"
+bus = &"Melodias"
+
+[node name="MidiPlayer2" parent="." groups=["midiSong"] instance=ExtResource("9_ahg3o")]
+file = "res://Sounds/Muranga/murangaMelodiaSecundária.mid"
+volume_db = 0.0
+soundfont = "res://Sounds/piano/1115_Korg_IS50_Marimboyd.sf2"
+bus = &"Melodias"
+
+[node name="MidiPlayer3" parent="." groups=["midiSong"] instance=ExtResource("9_ahg3o")]
+file = "res://Sounds/Muranga/murangaHarmoniaRefrão.mid"
+volume_db = 0.0
+soundfont = "res://Sounds/hollywood/198_Hollywood_ST.SF2"
+bus = &"Melodias"
+
+[node name="MidiPlayer4" parent="." groups=["midiSong"] instance=ExtResource("9_ahg3o")]
+file = "res://Sounds/Muranga/murangaBatera.mid"
+volume_db = 0.0
+soundfont = "res://Sounds/drums/Standard_Dum_Kit__by_Charlie.SF2"
+bus = &"Melodias"
+
+[node name="MidiQueue" parent="." instance=ExtResource("9_ahg3o")]
+file = "res://Sounds/Muranga/murangaMelodiaPrincipal.mid"
+sequence_per_seconds = 140
+
+[node name="ADSR" parent="." instance=ExtResource("10_tlx71")]
+bus = &"Músicas"
+
+[node name="Background" parent="." instance=ExtResource("11_c56jw")]
+
+[connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
+[connection signal="finished" from="MidiPlayer2" to="." method="_on_midi_player_finished"]
+[connection signal="finished" from="MidiPlayer3" to="." method="_on_midi_player_finished"]
+[connection signal="finished" from="MidiPlayer4" to="." method="_on_midi_player_finished"]
+[connection signal="midi_event" from="MidiQueue" to="." method="_on_midi_queue_midi_event"]

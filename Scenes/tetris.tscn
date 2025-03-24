@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2fa0dcn3xjk0"]
+[gd_scene load_steps=14 format=3 uid="uid://d2fa0dcn3xjk0"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_pc8dr"]
 [ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="2_2mu41"]
 [ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="3_j7ypv"]
+[ext_resource type="PackedScene" uid="uid://bvmmldh1s40y4" path="res://Scenes/crt.tscn" id="3_k45bc"]
 [ext_resource type="PackedScene" uid="uid://bxjhofwi2apcq" path="res://Scenes/keys/s_key.tscn" id="4_parqu"]
 [ext_resource type="PackedScene" uid="uid://0hmkdkkuw05d" path="res://Scenes/keys/d_key.tscn" id="5_6vygc"]
 [ext_resource type="PackedScene" uid="uid://b5rxv8lhgmi4c" path="res://Scenes/keys/f_key.tscn" id="6_m60uy"]
@@ -10,35 +11,43 @@
 [ext_resource type="PackedScene" uid="uid://b3g5s701o3vdj" path="res://Scenes/keys/k_key.tscn" id="8_n3pep"]
 [ext_resource type="PackedScene" uid="uid://bs6vy353a22wp" path="res://Scenes/keys/l_key.tscn" id="9_t6n0j"]
 [ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="10_xvwj3"]
+[ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="11_7lq2l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
 size = Vector2(1918, 93)
 
-[node name="Test" type="Node2D"]
+[node name="Tetris" type="Node2D" node_paths=PackedStringArray("midi_player", "midi_queue", "adsr", "camera", "notes")]
 script = ExtResource("1_pc8dr")
+midi_player = NodePath("MidiPlayer")
+midi_queue = NodePath("MidiQueue")
+adsr = NodePath("ADSR")
+camera = NodePath("Camera2D")
+notes = NodePath("notes")
 
 [node name="Camera2D" parent="." instance=ExtResource("10_xvwj3")]
+
+[node name="CRT" parent="." instance=ExtResource("3_k45bc")]
 
 [node name="buttons" type="Node2D" parent="."]
 position = Vector2(-25, 0)
 
 [node name="s_Key" parent="buttons" instance=ExtResource("4_parqu")]
-position = Vector2(277, 900)
+position = Vector2(298, 900)
 
 [node name="d_Key" parent="buttons" instance=ExtResource("5_6vygc")]
-position = Vector2(511, 900)
+position = Vector2(509, 900)
 
 [node name="f_Key" parent="buttons" instance=ExtResource("6_m60uy")]
-position = Vector2(745, 900)
+position = Vector2(720, 900)
 
 [node name="j_Key" parent="buttons" instance=ExtResource("7_t2gsa")]
-position = Vector2(1203, 900)
+position = Vector2(1010, 900)
 
 [node name="k_Key" parent="buttons" instance=ExtResource("8_n3pep")]
-position = Vector2(1437, 900)
+position = Vector2(1226, 900)
 
 [node name="l_Key" parent="buttons" instance=ExtResource("9_t6n0j")]
-position = Vector2(1671, 900)
+position = Vector2(1444, 900)
 
 [node name="notes" type="Node2D" parent="."]
 
@@ -48,7 +57,7 @@ position = Vector2(1671, 900)
 position = Vector2(960, 1094)
 shape = SubResource("RectangleShape2D_h8h1u")
 
-[node name="MidiPlayer" parent="." instance=ExtResource("2_2mu41")]
+[node name="MidiPlayer" parent="." groups=["midiSong"] instance=ExtResource("2_2mu41")]
 file = "res://Sounds/tetrisTheme.mid"
 soundfont = "res://Sounds/SpanishClassicalGuitar-SF2-20190618/SpanishClassicalGuitar-20190618.sf2"
 bus = &"Melodias"
@@ -58,9 +67,7 @@ file = "res://Sounds/tetrisTheme.mid"
 
 [node name="ADSR" parent="." instance=ExtResource("3_j7ypv")]
 
-[node name="beatTime" type="Timer" parent="."]
-one_shot = true
+[node name="Background" parent="." instance=ExtResource("11_7lq2l")]
 
 [connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
 [connection signal="midi_event" from="MidiQueue" to="." method="_on_midi_queue_midi_event"]
-[connection signal="timeout" from="beatTime" to="." method="_on_beat_time_timeout"]

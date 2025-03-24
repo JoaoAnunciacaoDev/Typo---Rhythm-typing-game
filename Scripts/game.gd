@@ -1,6 +1,12 @@
 extends Node2D
 
-var delta_sum : float = 0.0 # Matém o controle do tempo geral
+@export var delta_sum : float = 0.0 # Matém o controle do tempo geral
+@export var midi_player : MidiPlayer
+@export var midi_queue : MidiPlayer
+@export var adsr : AudioStreamPlayerADSR
+@export var camera : Camera2D
+@export var notes : Node2D
+
 var time_to_start : float = 2.0 # O tempo entre o MidiQueue e o MidiPlayer + música
 var startSong = {"first": false, "second": false} # Estado do MidiQueue e Player para evitar que se repita
 var note = preload("res://Scenes/mechanics/midi_note.tscn") # Cena das notas que caem, carregar com antecedência para instanciar futuramente
@@ -10,14 +16,12 @@ var config_path # Seleção do arquivo com as notas da música
 var state = {}
 
 func _ready() -> void:
-	beat_interval = 60.0 / float($MidiPlayer.sequence_per_seconds)
-	$beatTime.wait_time = beat_interval
-	$beatTime.start()
-	
-	if name == "Test":
+	if name == "Tutorial":
+		config_path = "res://songData/Tutorial.cfg"
+	elif name == "Tetris":
 		config_path = "res://songData/Tetris.cfg"
 		selected_Channel = 0
-	else:
+	elif name == "MurangaTema":
 		config_path = "res://songData/murangaCanal.cfg"
 		selected_Channel = 1
 	
@@ -50,15 +54,14 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	delta_sum += delta
-	
 	if delta_sum >= time_to_start and not startSong["first"]: # Primeiro toca o midiQueue, que irá ser responsável pornos mostrar as notas, é chamado antes da música começar para condizer com a música
 		startSong["first"] = true
-		$MidiQueue.play()
+		midi_queue.play()
 		
 	if delta_sum >= 3.85 and not startSong["second"]: # Após certo tempo o midiplayer responsável pelos sons das notas que o jogador vai tocar inicia
 		startSong["second"] = true
-		$MidiPlayer.play()
-		$ADSR.play()
+		get_tree().call_group("midiSong", "play")
+		adsr.play()
 	
 	for elem in state.values():
 		if Input.is_action_just_pressed(elem.key): # No momento que o jogador pressionar uma tecla
@@ -77,11 +80,11 @@ func _physics_process(delta: float) -> void:
 func msgErrorOrNot(texto, perfomance):
 	if perfomance:
 		texto.set_text("Acertou")
-		$MidiPlayer.volume_db = -20
+		midi_player.volume_db = -20
 	else:
 		texto.set_text("Errou")
-		$MidiPlayer.volume_db = -80
-		$Camera2D.shake()
+		midi_player.volume_db = -80
+		camera.shake()
 	texto.visible = true
 	await get_tree().create_timer(0.6).timeout
 	texto.visible = false
@@ -100,11 +103,8 @@ func queue_midi_note(ev):
 		n.global_position.y = -40
 		n.global_position.x = elem.node.global_position.x
 		n.key = elem.key
-		$notes.add_child(n)
+		notes.add_child(n)
 		elem.queue.push_back(n)
-
-func _on_beat_time_timeout() -> void:
-	$beatTime.start()
 
 func _on_midi_player_finished() -> void:
 	get_tree().quit()
