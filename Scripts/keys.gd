@@ -14,7 +14,7 @@ func _input(_event):
 	if Input.is_action_just_released(key):
 		pressed = false
 
-func _process(delta):	
+func _process(delta: float) -> void:
 	if pressed:
 		scale.y = lerp(scale.y, 6.0, 1.0)
 		scale.x = lerp(scale.x, 6.0, 1.0)

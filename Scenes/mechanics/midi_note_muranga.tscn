@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://bm1uvtq0c2vco"]
+
+[ext_resource type="Texture2D" uid="uid://dfc63g2dp4i51" path="res://Assets/muranga/Muranga1.png" id="1_87ful"]
+[ext_resource type="Script" path="res://Scripts/midi_note.gd" id="1_axvo4"]
+[ext_resource type="Texture2D" uid="uid://cwrihv03nfti1" path="res://Assets/muranga/Muranga2.png" id="2_li0x0"]
+[ext_resource type="Texture2D" uid="uid://je2mwieyi8ju" path="res://Assets/muranga/Muranga3.png" id="3_o7gei"]
+[ext_resource type="Texture2D" uid="uid://tdmpchcqpekq" path="res://Assets/muranga/Muranga4.png" id="4_4gkko"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nndsg"]
+size = Vector2(31.7808, 21.6438)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5p5ad"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_87ful")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_li0x0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_o7gei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4gkko")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[node name="MidiNote" type="Sprite2D"]
+scale = Vector2(3.65, 3.65)
+script = ExtResource("1_axvo4")
+muranga_key = true
+
+[node name="areaDetect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect"]
+position = Vector2(0, 0.136986)
+shape = SubResource("RectangleShape2D_nndsg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 3.0137)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_5p5ad")
+animation = &"idle"
+autoplay = "idle"
+
+[connection signal="area_shape_entered" from="areaDetect" to="." method="_on_area_detect_area_shape_entered"]

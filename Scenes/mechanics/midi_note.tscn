@@ -1,21 +1,36 @@
 [gd_scene load_steps=4 format=3 uid="uid://bpoiyfvey0ga8"]
 
-[ext_resource type="Texture2D" uid="uid://bxpxeis0badxw" path="res://Assets/trails.png" id="1_hvbi5"]
 [ext_resource type="Script" path="res://Scripts/midi_note.gd" id="2_sxgfj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nndsg"]
 size = Vector2(31.7808, 21.6438)
 
-[node name="MidiNote" type="Sprite2D"]
-modulate = Color(1, 1, 1, 0.596078)
+[sub_resource type="LabelSettings" id="LabelSettings_dara5"]
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0.607843, 0, 1)
+
+[node name="MidiNote" type="Sprite2D" node_paths=PackedStringArray("label")]
 scale = Vector2(3.65, 3.65)
-texture = ExtResource("1_hvbi5")
 script = ExtResource("2_sxgfj")
+label = NodePath("Label")
 
 [node name="areaDetect" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect"]
 position = Vector2(0, 0.136986)
 shape = SubResource("RectangleShape2D_nndsg")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -16.0
+offset_top = -23.5616
+offset_right = 16.0
+offset_bottom = 21.4384
+text = "A"
+label_settings = SubResource("LabelSettings_dara5")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="area_shape_entered" from="areaDetect" to="." method="_on_area_detect_area_shape_entered"]

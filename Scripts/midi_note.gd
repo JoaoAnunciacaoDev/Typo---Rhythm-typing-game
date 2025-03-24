@@ -1,13 +1,29 @@
 extends Sprite2D
 
-@export var expected_time: float
-@export var key: String
+@export var expected_time : float
+@export var key : String
+@export var muranga_key : bool
+@export var label : Label
 
 var state : String = ""
 var error_margin : float = 0.25
 var missed : bool = false
 var tutorialNote : bool = false
 var speed = abs(-40.0 - 500.0) 
+
+var abc_lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+func _ready() -> void:
+	if not muranga_key:
+		abc_lower.shuffle()
+		letters_random()
+
+func letters_random():
+	for i in abc_lower:
+		label.text = i
+		await get_tree().create_timer(0.15).timeout
+	
+	letters_random()
 
 func _physics_process(delta: float) -> void:
 	if state == "hit": # Caso o jogador acerte, a nota é removida da cena
