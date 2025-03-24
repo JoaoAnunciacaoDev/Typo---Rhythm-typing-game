@@ -5,9 +5,9 @@ const InitialStrength : float = 20.0
 
 var shakeStrength : float = 0.0
 
-func shake():
+func shake() -> void:
 	shakeStrength = InitialStrength
-	
+
 func _process(delta: float) -> void:
 	if shakeStrength > 0.05:
 		shakeStrength = lerp(shakeStrength, 0.0, shakeFade * delta)

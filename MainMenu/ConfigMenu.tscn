@@ -104,7 +104,9 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 2
 theme = SubResource("Theme_2qh16")
-value = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
 script = ExtResource("3_307bm")
 bus_name = "Master"
 

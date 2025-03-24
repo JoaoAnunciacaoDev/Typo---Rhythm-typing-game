@@ -8,7 +8,7 @@ extends Node2D
 var message_counter = 0.0
 var max_message = 0.4
 
-func _input(_event):
+func _input(_event) -> void:
 	if Input.is_action_just_pressed(key):
 		pressed = true
 	if Input.is_action_just_released(key):

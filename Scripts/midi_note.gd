@@ -18,7 +18,7 @@ func _ready() -> void:
 		abc_lower.shuffle()
 		letters_random()
 
-func letters_random():
+func letters_random() -> void:
 	for i in abc_lower:
 		label.text = i
 		await get_tree().create_timer(0.15).timeout
@@ -36,20 +36,20 @@ func _physics_process(delta: float) -> void:
 	# node start position - position of button to match (???) Deus sabe o que faz
 	global_position.y += delta * speed
 	
-func test_hit(time: float): # Testa se o jogador acertou dentro da margem de erro
+func test_hit(time: float) -> bool: # Testa se o jogador acertou dentro da margem de erro
 	if abs(expected_time - time) < error_margin:
 		return true
 	return false
 	
-func test_miss(time: float): # Se passou o tempo estimado e o jogador não apertou, é considerado erro
+func test_miss(time: float) -> bool: # Se passou o tempo estimado e o jogador não apertou, é considerado erro
 	if time > expected_time + error_margin:
 		return true
 	return false
 
-func hit():
+func hit() -> void:
 	state = "hit"
 	
-func miss():
+func miss() -> void:
 	state = "miss"
 	
 func _on_area_detect_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:

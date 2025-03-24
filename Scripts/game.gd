@@ -80,10 +80,11 @@ func _physics_process(delta: float) -> void:
 				elem.queue.pop_front().miss()
 				msgErrorOrNot(elem.node.Message, false)
 
-func msgErrorOrNot(texto, perfomance):
+func msgErrorOrNot(texto, perfomance) -> void:
 	if perfomance:
 		texto.set_text("Acertou")
-		midi_player.volume_db = db_to_linear(AudioServer.get_bus_volume_db(0))
+		var bus_index = AudioServer.get_bus_index("Master")
+		midi_player.volume_db = db_to_linear(AudioServer.get_bus_volume_db(bus_index))
 	else:
 		texto.set_text("Errou")
 		midi_player.volume_db = -80
@@ -97,7 +98,7 @@ func _on_midi_queue_midi_event(channel: Variant, event: Variant) -> void:
 		if event.type == 144: # 144 significa "Note on"
 			queue_midi_note(event)
 			
-func queue_midi_note(ev):
+func queue_midi_note(ev) -> void:
 	var elem = state.get(ev.note) # event.note nos dará o número da nota, que será referente a algum disponível na variável state
 		# 128 off, 144 on
 	if elem and ev.type == 144:
