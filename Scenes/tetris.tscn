@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2fa0dcn3xjk0"]
+[gd_scene load_steps=12 format=3 uid="uid://d2fa0dcn3xjk0"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_pc8dr"]
 [ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="2_2mu41"]
 [ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="3_j7ypv"]
-[ext_resource type="PackedScene" uid="uid://bvmmldh1s40y4" path="res://Scenes/crt.tscn" id="3_k45bc"]
 [ext_resource type="PackedScene" uid="uid://bxjhofwi2apcq" path="res://Scenes/keys/s_key.tscn" id="4_parqu"]
 [ext_resource type="PackedScene" uid="uid://0hmkdkkuw05d" path="res://Scenes/keys/d_key.tscn" id="5_6vygc"]
 [ext_resource type="PackedScene" uid="uid://b5rxv8lhgmi4c" path="res://Scenes/keys/f_key.tscn" id="6_m60uy"]
@@ -24,8 +23,6 @@ camera = NodePath("Camera2D")
 notes = NodePath("notes")
 
 [node name="Camera2D" parent="." instance=ExtResource("10_xvwj3")]
-
-[node name="CRT" parent="." instance=ExtResource("3_k45bc")]
 
 [node name="buttons" type="Node2D" parent="."]
 position = Vector2(-25, 0)

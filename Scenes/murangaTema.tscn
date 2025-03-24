@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6sfloc0svgao"]
+[gd_scene load_steps=16 format=3 uid="uid://c6sfloc0svgao"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_sbvj6"]
 [ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="2_qx811"]
@@ -10,9 +10,29 @@
 [ext_resource type="PackedScene" uid="uid://bs6vy353a22wp" path="res://Scenes/keys/l_key.tscn" id="8_yeoub"]
 [ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="9_ahg3o"]
 [ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="10_tlx71"]
+[ext_resource type="PackedScene" uid="uid://so1cemjy66sg" path="res://Scenes/text_animated.tscn" id="11_v86ju"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
 size = Vector2(1918, 93)
+
+[sub_resource type="Gradient" id="Gradient_my0ni"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qca6m"]
+gradient = SubResource("Gradient_my0ni")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_au0s8"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(550, 1, 1)
+gravity = Vector3(0, 98, 0)
+radial_accel_min = -1.0
+radial_accel_max = -1.0
+damping_min = 5.0
+damping_max = 5.0
+scale_min = 5.0
+scale_max = 10.0
+color_ramp = SubResource("GradientTexture1D_qca6m")
 
 [node name="MurangaTema" type="Node2D" node_paths=PackedStringArray("midi_player", "midi_queue", "adsr", "camera", "notes")]
 script = ExtResource("1_sbvj6")
@@ -83,6 +103,16 @@ sequence_per_seconds = 140
 
 [node name="ADSR" parent="." instance=ExtResource("10_tlx71")]
 bus = &"Músicas"
+
+[node name="snowGen" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(953, -4)
+scale = Vector2(1.5, 1)
+amount = 120
+process_material = SubResource("ParticleProcessMaterial_au0s8")
+lifetime = 6.0
+
+[node name="text_animated" parent="." instance=ExtResource("11_v86ju")]
 
 [connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
 [connection signal="finished" from="MidiPlayer2" to="." method="_on_midi_player_finished"]

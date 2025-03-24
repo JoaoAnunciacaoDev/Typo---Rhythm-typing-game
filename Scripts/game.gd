@@ -9,7 +9,7 @@ extends Node2D
 
 var time_to_start : float = 2.0 # O tempo entre o MidiQueue e o MidiPlayer + música
 var startSong = {"first": false, "second": false} # Estado do MidiQueue e Player para evitar que se repita
-var note = preload("res://Scenes/mechanics/midi_note.tscn") if name == "MurangaTema" else preload("res://Scenes/mechanics/midi_note_muranga.tscn") # Cena das notas que caem, carregar com antecedência para instanciar futuramente
+var note = preload("res://Scenes/mechanics/midi_note.tscn")  # Cena das notas que caem, carregar com antecedência para instanciar futuramente
 var selected_Channel : int # Canal MIDI selecionado
 var beat_interval : float
 var config_path # Seleção do arquivo com as notas da música
@@ -22,6 +22,7 @@ func _ready() -> void:
 		config_path = "res://songData/Tetris.cfg"
 		selected_Channel = 0
 	elif name == "MurangaTema":
+		note = preload("res://Scenes/mechanics/midi_note_muranga.tscn")
 		config_path = "res://songData/murangaCanal.cfg"
 		selected_Channel = 1
 	
