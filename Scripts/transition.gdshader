@@ -17,7 +17,7 @@ shader_type canvas_item;
 		if (type == 0) {
 			float xFraction = fract(FRAGCOORD.x / pixel_size);
 			float yFraction = fract(FRAGCOORD.y / pixel_size);
-			
+
 			float xDistance = abs(xFraction - 0.5);
 			float yDistance = abs(yFraction - 0.5);
 

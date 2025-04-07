@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkjpadkhggrx3"]
+[gd_scene load_steps=6 format=3 uid="uid://dkjpadkhggrx3"]
 
 [ext_resource type="Texture2D" uid="uid://n5qmie0x8fu7" path="res://Assets/bg_screen.png" id="1_yrxfq"]
 [ext_resource type="PackedScene" uid="uid://bvmmldh1s40y4" path="res://Scenes/crt.tscn" id="2_4dwwa"]
 [ext_resource type="Texture2D" uid="uid://bd6fjwtjby5kb" path="res://Assets/bg.png" id="2_j7tlh"]
 [ext_resource type="Texture2D" uid="uid://cxi0ymuqgxe24" path="res://Assets/bg_top.png" id="4_vxjb5"]
+[ext_resource type="PackedScene" uid="uid://bsoi201xhu2ch" path="res://Scenes/reset_button.tscn" id="5_0gae0"]
 
 [node name="Background" type="Node2D"]
 
@@ -41,3 +42,10 @@ offset_top = 1075.0
 offset_right = 1917.0
 offset_bottom = 1275.0
 texture = ExtResource("4_vxjb5")
+
+[node name="resetButton" parent="." instance=ExtResource("5_0gae0")]
+z_index = 1
+offset_left = 1665.0
+offset_top = 93.0
+offset_right = 1800.0
+offset_bottom = 235.0

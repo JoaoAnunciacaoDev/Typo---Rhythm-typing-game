@@ -16,15 +16,17 @@ var config_path # Seleção do arquivo com as notas da música
 var state = {}
 
 func _ready() -> void:
-	if name == "Tutorial":
-		config_path = "res://songData/Tutorial.cfg"
-	elif name == "Tetris":
+	Transition.play_fade_out()
+	
+	if name == "Tetris":
 		note = preload("res://Scenes/mechanics/midi_note_tetris.tscn")
 		config_path = "res://songData/Tetris.cfg"
+		Transition.next_scene = "res://Scenes/tetris.tscn"
 		selected_Channel = 0
 	elif name == "MurangaTema":
 		note = preload("res://Scenes/mechanics/midi_note_muranga.tscn")
 		config_path = "res://songData/murangaCanal.cfg"
+		Transition.next_scene = "res://Scenes/murangaTema.tscn"
 		selected_Channel = 1
 	
 	var config_file = ConfigFile.new()
@@ -53,8 +55,6 @@ func _ready() -> void:
 			state[note_num]["queue"] = config_file.get_value("Data", key)
 		elif "/node" in key:
 			state[note_num]["node"] = get_node(config_file.get_value("Data", key))
-	
-	Transition.play_fade_out()
 
 func _physics_process(delta: float) -> void:
 	delta_sum += delta
@@ -90,6 +90,7 @@ func msgErrorOrNot(texto, perfomance) -> void:
 		midi_player.volume_db = -80
 		TocadorSom.play_sfx("erro")
 		camera.shake()
+		
 	texto.visible = true
 	await get_tree().create_timer(0.6).timeout
 	texto.visible = false
