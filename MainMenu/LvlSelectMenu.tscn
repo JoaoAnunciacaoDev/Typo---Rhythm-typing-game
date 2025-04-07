@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://tstpoxs2oyqv"]
+[gd_scene load_steps=6 format=3 uid="uid://tstpoxs2oyqv"]
 
 [ext_resource type="Script" path="res://MainMenu/lvl_select_menu.gd" id="1_5j35g"]
+[ext_resource type="PackedScene" uid="uid://bc7dcs0xst3e5" path="res://Scenes/background_hack.tscn" id="2_dyrch"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ocp3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -11,7 +12,7 @@ border_width_bottom = 2
 border_color = Color(0.360784, 0.552941, 0.32549, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmeyg"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_j2h0i"]
 Button/colors/font_color = Color(0.360784, 0.552941, 0.32549, 1)
@@ -26,6 +27,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5j35g")
+
+[node name="BackgroundHack" parent="." instance=ExtResource("2_dyrch")]
+z_index = -1
+position = Vector2(951, 541)
+scale = Vector2(2.702, 2.719)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 z_index = -1

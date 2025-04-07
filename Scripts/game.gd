@@ -88,6 +88,7 @@ func msgErrorOrNot(texto, perfomance) -> void:
 	else:
 		texto.set_text("Errou")
 		midi_player.volume_db = -80
+		TocadorSom.play_sfx("erro")
 		camera.shake()
 	texto.visible = true
 	await get_tree().create_timer(0.6).timeout

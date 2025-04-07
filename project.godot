@@ -25,6 +25,7 @@ buses/default_bus_layout="res://Sounds/default_bus_layout.tres"
 
 Background="*res://Scenes/background.tscn"
 Transition="*res://Scenes/transition.tscn"
+TocadorSom="*res://Scripts/tocador_som.gd"
 
 [display]
 

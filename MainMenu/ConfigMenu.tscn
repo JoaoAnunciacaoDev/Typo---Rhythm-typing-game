@@ -1,7 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://dyr4sddulkbac"]
+[gd_scene load_steps=26 format=3 uid="uid://dyr4sddulkbac"]
 
 [ext_resource type="Script" path="res://MainMenu/config_menu.gd" id="1_lbad6"]
+[ext_resource type="PackedScene" uid="uid://bc7dcs0xst3e5" path="res://Scenes/background_hack.tscn" id="2_ng63v"]
 [ext_resource type="Script" path="res://MainMenu/h_slider.gd" id="3_307bm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lv8iy"]
+bg_color = Color(0.129559, 0.129558, 0.129558, 1)
+
+[sub_resource type="Theme" id="Theme_ete7l"]
+/styles/preto = SubResource("StyleBoxFlat_lv8iy")
 
 [sub_resource type="LabelSettings" id="LabelSettings_4a3aw"]
 font_size = 30
@@ -9,17 +16,49 @@ font_color = Color(0.360784, 0.552941, 0.32549, 1)
 
 [sub_resource type="Theme" id="Theme_2qh16"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6isyc"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q01ws"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2nj35"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1wia"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrvvm"]
+bg_color = Color(0.360784, 0.552941, 0.32549, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w41b8"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+bg_color = Color(0, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.360784, 0.552941, 0.32549, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0d57"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0nav"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_th81b"]
+bg_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Theme" id="Theme_6lalw"]
 CheckButton/colors/font_color = Color(0.360784, 0.552941, 0.32549, 1)
+CheckButton/styles/disabled = SubResource("StyleBoxFlat_6isyc")
+CheckButton/styles/disabled_mirrored = SubResource("StyleBoxFlat_q01ws")
+CheckButton/styles/focus = SubResource("StyleBoxFlat_2nj35")
+CheckButton/styles/hover = SubResource("StyleBoxFlat_o1wia")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_yrvvm")
 CheckButton/styles/normal = SubResource("StyleBoxFlat_w41b8")
+CheckButton/styles/normal_mirrored = SubResource("StyleBoxFlat_k0d57")
+CheckButton/styles/pressed = SubResource("StyleBoxFlat_l0nav")
+CheckButton/styles/pressed_mirrored = SubResource("StyleBoxFlat_th81b")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etq20"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -57,7 +96,7 @@ border_width_bottom = 2
 border_color = Color(0.360784, 0.552941, 0.32549, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5qfj"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b81jb"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -83,6 +122,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lbad6")
 
+[node name="BackgroundHack" parent="." instance=ExtResource("2_ng63v")]
+z_index = -4
+position = Vector2(951, 541)
+scale = Vector2(2.659, 2.719)
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 z_index = -1
 layout_mode = 0
@@ -91,16 +135,25 @@ offset_top = 96.0
 offset_right = 1534.0
 offset_bottom = 1020.0
 
+[node name="Panel" type="ColorRect" parent="CenterContainer"]
+z_index = -3
+custom_minimum_size = Vector2(650, 540)
+layout_mode = 2
+theme = SubResource("Theme_ete7l")
+color = Color(0, 0, 0, 0.686275)
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
 [node name="VolumeLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(511, 40)
 layout_mode = 2
 text = "Volume"
 label_settings = SubResource("LabelSettings_4a3aw")
 horizontal_alignment = 1
 
 [node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 2
 theme = SubResource("Theme_2qh16")
@@ -111,6 +164,7 @@ script = ExtResource("3_307bm")
 bus_name = "Master"
 
 [node name="FullScreenCheckBox" type="CheckButton" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(511, 95)
 layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_6lalw")
@@ -121,7 +175,16 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_b073j")
 text = "Tela Cheia  "
 alignment = 1
 
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/VBoxContainer/FullScreenCheckBox"]
+z_index = -3
+layout_mode = 0
+offset_right = 503.0
+offset_bottom = 93.0
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
 [node name="Voltar" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(511, 95)
 layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_n7grb")
