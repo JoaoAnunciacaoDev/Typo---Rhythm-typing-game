@@ -11,6 +11,10 @@ func _on_fase_2_pressed() -> void:
 	Transition.next_scene = "res://Scenes/tetris.tscn"
 	Transition.play_fade_in()
 
+func _on_fase_3_pressed() -> void:
+	Transition.next_scene = "res://Scenes/hackerScene.tscn"
+	Transition.play_fade_in()
+
 func _on_voltar_pressed() -> void:
 	Transition.next_scene = "res://MainMenu/MainMenu.tscn"
 	Transition.play_fade_in()

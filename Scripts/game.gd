@@ -28,6 +28,11 @@ func _ready() -> void:
 		config_path = "res://songData/murangaCanal.cfg"
 		Transition.next_scene = "res://Scenes/murangaTema.tscn"
 		selected_Channel = 1
+	elif name == "hackerTheme":
+		note = preload("res://Scenes/mechanics/midi_note.tscn")
+		Transition.next_scene = "res://Scenes/hackerScene.tscn"
+		config_path = "res://songData/hackerTheme.cfg"
+		selected_Channel = 0
 	
 	var config_file = ConfigFile.new()
 

@@ -9,6 +9,8 @@ func play_sfx(sfx_name : String):
 		asp.stream = erro
 
 	add_child(asp)
+	
+	asp.bus = "Master"
 
 	asp.play()
 

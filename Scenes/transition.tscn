@@ -86,6 +86,7 @@ color = Color(0, 0, 0, 1)
 libraries = {
 "": SubResource("AnimationLibrary_oqkt8")
 }
+speed_scale = 1.25
 
 [node name="Background" parent="." instance=ExtResource("3_7yksb")]
 

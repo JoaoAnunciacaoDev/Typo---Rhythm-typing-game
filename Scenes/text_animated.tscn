@@ -70,7 +70,7 @@ autoplay = "writing_text"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 modulate = Color(0.360784, 0.552941, 0.32549, 1)
-z_index = -1
+z_index = -2
 offset_left = 210.0
 offset_top = 132.0
 offset_right = 1516.0
