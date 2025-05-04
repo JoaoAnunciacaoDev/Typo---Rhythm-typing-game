@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://1cvq4dmwhxud"]
+[gd_scene load_steps=14 format=3 uid="uid://1cvq4dmwhxud"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_8vra6"]
 [ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="2_6y8kf"]
@@ -8,12 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://qot5mj5ucggk" path="res://Scenes/keys/j_key.tscn" id="6_e5pp7"]
 [ext_resource type="PackedScene" uid="uid://b3g5s701o3vdj" path="res://Scenes/keys/k_key.tscn" id="7_w2x03"]
 [ext_resource type="PackedScene" uid="uid://bs6vy353a22wp" path="res://Scenes/keys/l_key.tscn" id="8_wj1qk"]
+[ext_resource type="PackedScene" uid="uid://bc7dcs0xst3e5" path="res://Scenes/background_hack.tscn" id="9_0yx72"]
 [ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="9_ms7xb"]
 [ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="10_klfef"]
-[ext_resource type="PackedScene" uid="uid://so1cemjy66sg" path="res://Scenes/text_animated.tscn" id="11_nallv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
 size = Vector2(1918, 93)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkow0"]
+size = Vector2(1932, 277)
 
 [node name="hackerTheme" type="Node2D" node_paths=PackedStringArray("midi_player", "midi_queue", "adsr", "camera", "notes")]
 script = ExtResource("1_8vra6")
@@ -22,6 +25,11 @@ midi_queue = NodePath("MidiQueue")
 adsr = NodePath("ADSR")
 camera = NodePath("Camera2D")
 notes = NodePath("notes")
+
+[node name="BackgroundHack" parent="." instance=ExtResource("9_0yx72")]
+z_index = -1
+position = Vector2(951, 541)
+scale = Vector2(2.70156, 2.71944)
 
 [node name="Camera2D" parent="." instance=ExtResource("2_6y8kf")]
 
@@ -51,6 +59,8 @@ position = Vector2(1444, 900)
 z_index = -1
 
 [node name="missArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="missArea"]
 position = Vector2(960, 1094)
@@ -66,7 +76,13 @@ file = "res://Sounds/hackerTheme.mid"
 
 [node name="ADSR" parent="." instance=ExtResource("10_klfef")]
 
-[node name="text_animated" parent="." instance=ExtResource("11_nallv")]
+[node name="HitZone" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
+position = Vector2(961, 901.5)
+shape = SubResource("RectangleShape2D_wkow0")
 
 [connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
 [connection signal="midi_event" from="MidiQueue" to="." method="_on_midi_queue_midi_event"]

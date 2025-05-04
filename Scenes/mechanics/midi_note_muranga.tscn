@@ -35,6 +35,8 @@ script = ExtResource("1_axvo4")
 muranga_key = true
 
 [node name="areaDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect"]
 position = Vector2(0, 0.136986)
@@ -47,4 +49,4 @@ sprite_frames = SubResource("SpriteFrames_5p5ad")
 animation = &"idle"
 autoplay = "idle"
 
-[connection signal="area_shape_entered" from="areaDetect" to="." method="_on_area_detect_area_shape_entered"]
+[connection signal="area_entered" from="areaDetect" to="." method="_on_area_detect_area_entered"]

@@ -191,5 +191,8 @@ theme = SubResource("Theme_n7grb")
 theme_override_font_sizes/font_size = 35
 text = "Voltar"
 
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/HSlider" to="." method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/FullScreenCheckBox" to="." method="_on_mouse_entered"]
 [connection signal="toggled" from="CenterContainer/VBoxContainer/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Voltar" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Voltar" to="." method="_on_voltar_pressed"]

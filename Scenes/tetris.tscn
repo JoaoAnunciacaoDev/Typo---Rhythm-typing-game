@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2fa0dcn3xjk0"]
+[gd_scene load_steps=13 format=3 uid="uid://d2fa0dcn3xjk0"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_pc8dr"]
 [ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="2_2mu41"]
@@ -13,6 +13,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
 size = Vector2(1918, 93)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_273kq"]
+size = Vector2(1932, 277)
 
 [node name="Tetris" type="Node2D" node_paths=PackedStringArray("midi_player", "midi_queue", "adsr", "camera", "notes")]
 script = ExtResource("1_pc8dr")
@@ -64,6 +67,14 @@ bus = &"Melodias"
 file = "res://Sounds/tetrisTheme.mid"
 
 [node name="ADSR" parent="." instance=ExtResource("3_j7ypv")]
+
+[node name="HitZone" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
+position = Vector2(961, 901.5)
+shape = SubResource("RectangleShape2D_273kq")
 
 [connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
 [connection signal="midi_event" from="MidiQueue" to="." method="_on_midi_queue_midi_event"]

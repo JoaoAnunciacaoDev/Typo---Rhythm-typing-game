@@ -9,4 +9,5 @@ offset_bottom = 40.0
 texture_normal = ExtResource("1_44tdb")
 script = ExtResource("2_ar48m")
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="." to="." method="_on_pressed"]

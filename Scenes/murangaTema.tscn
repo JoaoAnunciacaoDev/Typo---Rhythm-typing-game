@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c6sfloc0svgao"]
+[gd_scene load_steps=16 format=3 uid="uid://c6sfloc0svgao"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_sbvj6"]
 [ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="2_qx811"]
@@ -32,6 +32,9 @@ damping_max = 5.0
 scale_min = 5.0
 scale_max = 10.0
 color_ramp = SubResource("GradientTexture1D_qca6m")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kv7iw"]
+size = Vector2(1932, 277)
 
 [node name="MurangaTema" type="Node2D" node_paths=PackedStringArray("midi_player", "midi_queue", "adsr", "camera", "notes")]
 script = ExtResource("1_sbvj6")
@@ -103,7 +106,6 @@ file = "res://Sounds/Muranga/murangaMelodiaPrincipal.mid"
 sequence_per_seconds = 140
 
 [node name="ADSR" parent="." instance=ExtResource("10_tlx71")]
-bus = &"Músicas"
 
 [node name="snowGen" type="GPUParticles2D" parent="."]
 z_index = -1
@@ -112,6 +114,14 @@ scale = Vector2(1.5, 1)
 amount = 120
 process_material = SubResource("ParticleProcessMaterial_au0s8")
 lifetime = 6.0
+
+[node name="HitZone" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
+position = Vector2(961, 901.5)
+shape = SubResource("RectangleShape2D_kv7iw")
 
 [connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
 [connection signal="finished" from="MidiPlayer2" to="." method="_on_midi_player_finished"]

@@ -15,22 +15,30 @@ var beat_interval : float
 var config_path # Seleção do arquivo com as notas da música
 var state = {}
 
+func reloadCheck() -> void:
+	if Input.is_action_just_pressed("esc"):
+		Transition.next_scene = get_tree().current_scene.scene_file_path
+		Transition.play_fade_in()
+
 func _ready() -> void:
+	Transition.next_scene = "res://MainMenu/MainMenu.tscn"
 	Transition.play_fade_out()
 	
 	if name == "Tetris":
+		
 		note = preload("res://Scenes/mechanics/midi_note_tetris.tscn")
 		config_path = "res://songData/Tetris.cfg"
-		Transition.next_scene = "res://Scenes/tetris.tscn"
 		selected_Channel = 0
+		
 	elif name == "MurangaTema":
+		
 		note = preload("res://Scenes/mechanics/midi_note_muranga.tscn")
 		config_path = "res://songData/murangaCanal.cfg"
-		Transition.next_scene = "res://Scenes/murangaTema.tscn"
 		selected_Channel = 1
+		
 	elif name == "hackerTheme":
+		
 		note = preload("res://Scenes/mechanics/midi_note.tscn")
-		Transition.next_scene = "res://Scenes/hackerScene.tscn"
 		config_path = "res://songData/hackerTheme.cfg"
 		selected_Channel = 0
 	
@@ -62,7 +70,11 @@ func _ready() -> void:
 			state[note_num]["node"] = get_node(config_file.get_value("Data", key))
 
 func _physics_process(delta: float) -> void:
+	
+	reloadCheck()
+	
 	delta_sum += delta
+	
 	if delta_sum >= time_to_start and not startSong["first"]: # Primeiro toca o midiQueue, que irá ser responsável pornos mostrar as notas, é chamado antes da música começar para condizer com a música
 		startSong["first"] = true
 		midi_queue.play()
@@ -73,15 +85,21 @@ func _physics_process(delta: float) -> void:
 	
 	for elem in state.values():
 		if Input.is_action_just_pressed(elem.key): # No momento que o jogador pressionar uma tecla
+			
 			if not elem.queue.is_empty(): # É verificado se há alguma nota na fila
-				if elem.queue.front().test_hit(delta_sum) and not elem.queue.front().missed: # Se houver, é checado se o jogador acertou o momento
-					elem.queue.pop_front().hit() # É removido da fila e da cena
-					msgErrorOrNot(elem.node.Message, true) # Mensagem na tela
-				else:
-					msgErrorOrNot(elem.node.Message, false)
+					if elem.queue.front().test_hit(delta_sum): # Se houver, é checado se o jogador acertou o momento
+						
+						elem.queue.pop_front().hit() # É removido da fila e da cena
+						msgErrorOrNot(elem.node.Message, true) # Mensagem na tela
+						continue
+						
+					elif elem.queue.front().inHitZone:
+						msgErrorOrNot(elem.node.Message, false)
+						continue
 		
 		if not elem.queue.is_empty(): # Aqui é verificado se o jogador deixou passar alguma tecla
 			if elem.queue.front().test_miss(delta_sum):
+				
 				elem.queue.pop_front().miss()
 				msgErrorOrNot(elem.node.Message, false)
 
@@ -107,7 +125,7 @@ func _on_midi_queue_midi_event(channel: Variant, event: Variant) -> void:
 			
 func queue_midi_note(ev) -> void:
 	var elem = state.get(ev.note) # event.note nos dará o número da nota, que será referente a algum disponível na variável state
-		# 128 off, 144 on
+	# 128 off, 144 on
 	if elem and ev.type == 144:
 		var n = note.instantiate() # No momento em que a nota estiver sendo tocada, criaremos uma cópia do nó que representará a nota
 		n.expected_time = delta_sum + time_to_start

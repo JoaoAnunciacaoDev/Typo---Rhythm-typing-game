@@ -18,6 +18,8 @@ script = ExtResource("2_sxgfj")
 label = NodePath("Label")
 
 [node name="areaDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect"]
 position = Vector2(0, 0.136986)
@@ -33,4 +35,4 @@ label_settings = SubResource("LabelSettings_dara5")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="area_shape_entered" from="areaDetect" to="." method="_on_area_detect_area_shape_entered"]
+[connection signal="area_entered" from="areaDetect" to="." method="_on_area_detect_area_entered"]

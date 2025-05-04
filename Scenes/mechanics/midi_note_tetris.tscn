@@ -47,6 +47,8 @@ script = ExtResource("1_fyb14")
 muranga_key = true
 
 [node name="areaDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect"]
 position = Vector2(0, 0.136986)
@@ -61,4 +63,4 @@ autoplay = "idle"
 frame = 5
 frame_progress = 0.849502
 
-[connection signal="area_shape_entered" from="areaDetect" to="." method="_on_area_detect_area_shape_entered"]
+[connection signal="area_entered" from="areaDetect" to="." method="_on_area_detect_area_entered"]
