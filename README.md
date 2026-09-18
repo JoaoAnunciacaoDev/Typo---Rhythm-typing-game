@@ -109,7 +109,7 @@ Cada fase referencia um recurso `SongData` que declara:
 - mapeamento de notas MIDI para trilhas;
 - atraso/calibração do áudio.
 
-As regras comuns ficam centralizadas em `gameplayData/default_rules.tres`, incluindo tempo de viagem, janelas de julgamento, tolerância antecipada, pontuação, classificação e estilo das trilhas. As posições de criação e acerto são marcadores `NoteSpawn` e `HitTarget` nas cenas.
+As regras comuns ficam centralizadas em `gameplayData/default_rules.tres`, incluindo tempo de viagem, janelas de julgamento, tolerância antecipada, pontuação, classificação e estilo das trilhas. As posições de criação e acerto são marcadores `NoteSpawn` e `HitTarget` na cena-base de gameplay.
 
 As trilhas usam uma base escura, preenchimento colorido e bordas mais fortes para manter o contraste mesmo em fundos movimentados.
 

@@ -10,4 +10,4 @@ Ele concentra:
 - limites das classificações de `S` a `D`;
 - cores, largura e contraste visual das trilhas.
 
-Dados específicos de uma música continuam em `songData/*.tres`. As posições de surgimento e acerto ficam nos marcadores `NoteSpawn` e `HitTarget` de cada cena.
+Dados específicos de uma música continuam em `songData/*.tres`. A estrutura compartilhada das fases, incluindo os marcadores `NoteSpawn` e `HitTarget`, fica em `Scenes/gameplay_base.tscn`; cada cena de música contém apenas áudio e visuais exclusivos.

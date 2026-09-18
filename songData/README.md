@@ -1,6 +1,8 @@
 # Como configurar músicas
 
-Cada fase referencia um recurso `SongData` no nó raiz. O recurso concentra o que antes ficava em condicionais de `game.gd` e arquivos `.cfg` separados.
+Cada fase herda `Scenes/gameplay_base.tscn` e referencia um recurso `SongData` no nó raiz. A cena-base concentra câmera, trilhas, marcadores, fila MIDI e conexão dos eventos. Cada cena de música mantém somente os players de áudio e elementos visuais específicos.
+
+O recurso `SongData` concentra o que antes ficava em condicionais de `game.gd` e arquivos `.cfg` separados.
 
 Campos principais:
 
@@ -13,13 +15,12 @@ Campos principais:
 
 As regras que devem ser iguais em todas as músicas ficam em `gameplayData/default_rules.tres`: tempo de viagem, janelas de julgamento, tolerância antecipada, pontuação, multiplicadores, notas de desempenho e aparência das trilhas.
 
-As posições verticais não são números de `SongData`. Cada cena possui os marcadores `NoteSpawn` e `HitTarget`, que permitem ajustar visualmente onde as notas surgem e onde ocorre o acerto.
+As posições verticais não são números de `SongData`. A cena-base possui os marcadores `NoteSpawn` e `HitTarget`, que permitem ajustar visualmente onde as notas surgem e onde ocorre o acerto para todas as músicas.
 
 Para adicionar uma música:
 
 1. Duplique um dos arquivos `.tres` desta pasta.
 2. Configure os campos e o mapeamento nota→trilha.
-3. Monte na cena os players audíveis listados em `audio_player_paths`.
-4. Adicione `NoteSpawn` e `HitTarget` e atribua os marcadores ao nó raiz.
-5. Atribua `song_data` e o recurso compartilhado `gameplay_rules` ao nó raiz.
-6. Conecte apenas `MidiQueue.midi_event` a `_on_midi_queue_midi_event`.
+3. Crie uma cena herdada de `Scenes/gameplay_base.tscn`.
+4. Atribua `song_data` no nó raiz.
+5. Monte na cena os players audíveis listados em `audio_player_paths` e os visuais exclusivos da música.
