@@ -1,7 +1,7 @@
 extends Sprite2D
 
-@export var expected_time : float
-@export var key : String
+@export var expected_time := 0.0
+@export var key: StringName
 @export var muranga_key : bool
 @export var label : Label
 @export var textures : Array[Texture2D]
@@ -9,16 +9,11 @@ extends Sprite2D
 @export var animate_textures := false
 @export_range(1.0, 30.0, 0.5) var texture_fps := 8.0
 
-var state : String = ""
-var error_margin : float = 0.25
-var missed : bool = false
-var tutorialNote : bool = false
-var inHitZone : bool = false
-var speed = abs(-40.0 - 500.0) 
 var texture_frame := 0
 var texture_elapsed := 0.0
-
-var abc_lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+var spawn_position := Vector2.ZERO
+var target_position := Vector2.ZERO
+var travel_time := 2.0
 
 func _ready() -> void:
 	if not textures.is_empty() and is_instance_valid(sprite):
@@ -27,28 +22,40 @@ func _ready() -> void:
 		else:
 			sprite.texture = textures.pick_random()
 
-	if not muranga_key:
-		abc_lower.shuffle()
-		letters_random()
-
-func letters_random() -> void:
-	for i in abc_lower:
-		label.text = i
-		await get_tree().create_timer(0.15).timeout
-	
-	letters_random()
+	_update_label()
 
 func _physics_process(delta: float) -> void:
 	_update_texture_animation(delta)
 
-	if state == "hit": # Caso o jogador acerte, a nota é removida da cena
-		queue_free()
-	
-	if state == "miss": # Caso a nota saia da tela também é removida da tela, ou se o jogador errou
-		queue_free()
-	
-	# node start position - position of button to match (???) Deus sabe o que faz
-	global_position.y += delta * speed
+
+func configure(action: StringName, hit_time: float, from_position: Vector2, to_position: Vector2, duration: float) -> void:
+	key = action
+	expected_time = hit_time
+	spawn_position = from_position
+	target_position = to_position
+	travel_time = maxf(duration, 0.01)
+	global_position = spawn_position
+	_update_label()
+
+
+func update_song_time(song_time: float) -> void:
+	var progress := 1.0 - ((expected_time - song_time) / travel_time)
+	global_position = spawn_position.lerp(target_position, progress)
+
+
+func judgement_at(song_time: float, perfect_window: float, good_window: float, miss_window: float) -> StringName:
+	var difference := absf(expected_time - song_time)
+	if difference <= perfect_window:
+		return &"perfect"
+	if difference <= good_window:
+		return &"good"
+	if difference <= miss_window:
+		return &"ok"
+	return &""
+
+
+func is_late(song_time: float, miss_window: float) -> bool:
+	return song_time > expected_time + miss_window
 
 
 func _update_texture_animation(delta: float) -> void:
@@ -62,24 +69,13 @@ func _update_texture_animation(delta: float) -> void:
 		texture_frame = (texture_frame + 1) % textures.size()
 		sprite.texture = textures[texture_frame]
 	
-func test_hit(time: float) -> bool: # Testa se o jogador acertou dentro da margem de erro
-	if abs(expected_time - time) < error_margin:
-		return true
-	return false
-	
-func test_miss(time: float) -> bool: # Se passou o tempo estimado e o jogador não apertou, é considerado erro
-	if time > abs(expected_time + error_margin):
-		return true
-	return false
-
 func hit() -> void:
-	state = "hit"
+	queue_free()
 	
 func miss() -> void:
-	state = "miss"
+	queue_free()
 
-func _on_area_detect_area_entered(area: Area2D) -> void:
-	if area.name == "missArea": # Talvez seja desnecessário, mas implementei para garantir que ao passar de certo ponto é considerado erro
-		missed = true
-	elif area.name == "HitZone":
-		inHitZone = true
+
+func _update_label() -> void:
+	if is_instance_valid(label) and not key.is_empty():
+		label.text = Settings.get_binding_text(key).to_upper()

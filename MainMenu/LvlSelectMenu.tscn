@@ -60,20 +60,20 @@ offset_bottom = 1017.0
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=38879650]
 layout_mode = 2
 
-[node name="fase1" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1969425221]
+[node name="fase1" type="Button" parent="CenterContainer/VBoxContainer" unique_id=18442818]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_j2h0i")
+theme_override_font_sizes/font_size = 69
+text = "Tetris"
+
+[node name="fase2" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1969425221]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_j2h0i")
 theme_override_font_sizes/font_size = 69
 text = "Muranga"
-
-[node name="fase2" type="Button" parent="CenterContainer/VBoxContainer" unique_id=18442818]
-layout_mode = 2
-size_flags_vertical = 3
-theme = SubResource("Theme_j2h0i")
-theme_override_font_sizes/font_size = 69
-text = "Tetris"
 
 [node name="fase3" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1573972085]
 layout_mode = 2
@@ -216,9 +216,9 @@ theme_override_font_sizes/font_size = 27
 text = "Iniciar"
 
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/fase1" to="." method="_on_mouse_entered"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/fase1" to="." method="_on_fase_1_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/fase1" to="." method="_on_fase_2_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/fase2" to="." method="_on_mouse_entered"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/fase2" to="." method="_on_fase_2_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/fase2" to="." method="_on_fase_1_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/fase3" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/fase3" to="." method="_on_fase_3_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/voltar" to="." method="_on_mouse_entered"]

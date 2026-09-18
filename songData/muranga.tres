@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SongData" format=3 uid="uid://b0u3ixjiluh6"]
+
+[ext_resource type="Script" uid="uid://bk5jicpeciav" path="res://Scripts/song_data.gd" id="1_song"]
+[ext_resource type="PackedScene" uid="uid://bm1uvtq0c2vco" path="res://Scenes/mechanics/midi_note_muranga.tscn" id="2_note"]
+
+[resource]
+script = ExtResource("1_song")
+chart_midi_file = "res://Sounds/Muranga/murangaMelodiaPrincipal.mid"
+note_scene = ExtResource("2_note")
+midi_channel = 1
+audio_player_paths = Array[NodePath]([NodePath("MidiPlayer"), NodePath("MidiPlayer2"), NodePath("MidiPlayer3"), NodePath("MidiPlayer4")])
+midi_notes = PackedInt32Array(55, 60, 65, 69, 72)
+lane_actions = PackedStringArray("d", "f", "j", "k", "l")

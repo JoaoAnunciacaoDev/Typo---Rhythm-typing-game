@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6sfloc0svgao"]
+[gd_scene load_steps=15 format=3 uid="uid://c6sfloc0svgao"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_sbvj6"]
 [ext_resource type="PackedScene" uid="uid://c2aqiwkaifb2d" path="res://Scenes/mechanics/camera_2d.tscn" id="2_qx811"]
@@ -9,10 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://b3g5s701o3vdj" path="res://Scenes/keys/k_key.tscn" id="7_cr2eo"]
 [ext_resource type="PackedScene" uid="uid://bs6vy353a22wp" path="res://Scenes/keys/l_key.tscn" id="8_yeoub"]
 [ext_resource type="PackedScene" uid="uid://cuyd1qv0pn26e" path="res://addons/midi/MidiPlayer.tscn" id="9_ahg3o"]
-[ext_resource type="PackedScene" uid="uid://bdvkdv77fslji" path="res://addons/midi/ADSR.tscn" id="10_tlx71"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8h1u"]
-size = Vector2(1918, 93)
+[ext_resource type="Resource" path="res://songData/muranga.tres" id="11_song"]
+[ext_resource type="Resource" path="res://gameplayData/default_rules.tres" id="12_rules"]
 
 [sub_resource type="Gradient" id="Gradient_my0ni"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -33,69 +31,68 @@ scale_min = 5.0
 scale_max = 10.0
 color_ramp = SubResource("GradientTexture1D_qca6m")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kv7iw"]
-size = Vector2(1932, 277)
-
-[node name="MurangaTema" type="Node2D" node_paths=PackedStringArray("midi_player", "midi_queue", "adsr", "camera", "notes")]
+[node name="MurangaTema" type="Node2D" node_paths=PackedStringArray("midi_queue", "camera", "notes", "note_spawn", "hit_target")]
 script = ExtResource("1_sbvj6")
-midi_player = NodePath("MidiPlayer")
+song_data = ExtResource("11_song")
+gameplay_rules = ExtResource("12_rules")
 midi_queue = NodePath("MidiQueue")
-adsr = NodePath("ADSR")
 camera = NodePath("Camera2D")
 notes = NodePath("notes")
+note_spawn = NodePath("NoteSpawn")
+hit_target = NodePath("HitTarget")
 
 [node name="Camera2D" parent="." instance=ExtResource("2_qx811")]
+
+[node name="NoteSpawn" type="Marker2D" parent="."]
+position = Vector2(0, -40)
+
+[node name="HitTarget" type="Marker2D" parent="."]
+position = Vector2(0, 930)
 
 [node name="buttons" type="Node2D" parent="."]
 z_index = -1
 position = Vector2(-25, 0)
 
 [node name="s_Key" parent="buttons" instance=ExtResource("3_tyv71")]
-position = Vector2(298, 900)
+position = Vector2(298, 860)
 
 [node name="d_Key" parent="buttons" instance=ExtResource("4_x5prw")]
-position = Vector2(509, 900)
+position = Vector2(509, 860)
 
 [node name="f_Key" parent="buttons" instance=ExtResource("5_1cxof")]
-position = Vector2(720, 900)
+position = Vector2(720, 860)
 
 [node name="j_Key" parent="buttons" instance=ExtResource("6_8ts0i")]
-position = Vector2(1010, 900)
+position = Vector2(1010, 860)
 
 [node name="k_Key" parent="buttons" instance=ExtResource("7_cr2eo")]
-position = Vector2(1226, 900)
+position = Vector2(1226, 860)
 
 [node name="l_Key" parent="buttons" instance=ExtResource("8_yeoub")]
-position = Vector2(1444, 900)
+position = Vector2(1444, 860)
 
 [node name="notes" type="Node2D" parent="."]
 z_index = -1
 
-[node name="missArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="missArea"]
-position = Vector2(960, 1094)
-shape = SubResource("RectangleShape2D_h8h1u")
-
-[node name="MidiPlayer" parent="." groups=["midiSong"] instance=ExtResource("9_ahg3o")]
+[node name="MidiPlayer" parent="." instance=ExtResource("9_ahg3o")]
 file = "res://Sounds/Muranga/murangaMelodiaPrincipal.mid"
 volume_db = 0.0
 soundfont = "res://Sounds/SpanishClassicalGuitar-SF2-20190618/SpanishClassicalGuitar-20190618.sf2"
 bus = &"Melodias"
 
-[node name="MidiPlayer2" parent="." groups=["midiSong"] instance=ExtResource("9_ahg3o")]
+[node name="MidiPlayer2" parent="." instance=ExtResource("9_ahg3o")]
 file = "res://Sounds/Muranga/murangaMelodiaSecundária.mid"
 volume_db = 0.0
 soundfont = "res://Sounds/piano/1115_Korg_IS50_Marimboyd.sf2"
 bus = &"Melodias"
 
-[node name="MidiPlayer3" parent="." groups=["midiSong"] instance=ExtResource("9_ahg3o")]
+[node name="MidiPlayer3" parent="." instance=ExtResource("9_ahg3o")]
 file = "res://Sounds/Muranga/murangaHarmoniaRefrão.mid"
 volume_db = 0.0
 soundfont = "res://Sounds/hollywood/198_Hollywood_ST.SF2"
 bus = &"Melodias"
 
-[node name="MidiPlayer4" parent="." groups=["midiSong"] instance=ExtResource("9_ahg3o")]
+[node name="MidiPlayer4" parent="." instance=ExtResource("9_ahg3o")]
 file = "res://Sounds/Muranga/murangaBatera.mid"
 volume_db = 0.0
 soundfont = "res://Sounds/drums/Standard_Dum_Kit__by_Charlie.SF2"
@@ -105,8 +102,6 @@ bus = &"Melodias"
 file = "res://Sounds/Muranga/murangaMelodiaPrincipal.mid"
 sequence_per_seconds = 140
 
-[node name="ADSR" parent="." instance=ExtResource("10_tlx71")]
-
 [node name="snowGen" type="GPUParticles2D" parent="."]
 z_index = -1
 position = Vector2(953, -4)
@@ -115,16 +110,4 @@ amount = 120
 process_material = SubResource("ParticleProcessMaterial_au0s8")
 lifetime = 6.0
 
-[node name="HitZone" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
-position = Vector2(961, 901.5)
-shape = SubResource("RectangleShape2D_kv7iw")
-
-[connection signal="finished" from="MidiPlayer" to="." method="_on_midi_player_finished"]
-[connection signal="finished" from="MidiPlayer2" to="." method="_on_midi_player_finished"]
-[connection signal="finished" from="MidiPlayer3" to="." method="_on_midi_player_finished"]
-[connection signal="finished" from="MidiPlayer4" to="." method="_on_midi_player_finished"]
 [connection signal="midi_event" from="MidiQueue" to="." method="_on_midi_queue_midi_event"]

@@ -1,9 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpoiyfvey0ga8"]
+[gd_scene load_steps=3 format=3 uid="uid://bpoiyfvey0ga8"]
 
 [ext_resource type="Script" path="res://Scripts/midi_note.gd" id="2_sxgfj"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nndsg"]
-size = Vector2(31.7808, 21.6438)
 
 [sub_resource type="LabelSettings" id="LabelSettings_dara5"]
 font_size = 32
@@ -17,14 +14,6 @@ scale = Vector2(3.65, 3.65)
 script = ExtResource("2_sxgfj")
 label = NodePath("Label")
 
-[node name="areaDetect" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect"]
-position = Vector2(0, 0.136986)
-shape = SubResource("RectangleShape2D_nndsg")
-
 [node name="Label" type="Label" parent="."]
 offset_left = -16.0
 offset_top = -23.5616
@@ -34,5 +23,3 @@ text = "A"
 label_settings = SubResource("LabelSettings_dara5")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[connection signal="area_entered" from="areaDetect" to="." method="_on_area_detect_area_entered"]

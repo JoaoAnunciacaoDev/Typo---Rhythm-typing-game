@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SongData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scripts/song_data.gd" id="1_song"]
+[ext_resource type="PackedScene" path="res://Scenes/mechanics/midi_note_tetris.tscn" id="2_note"]
+
+[resource]
+script = ExtResource("1_song")
+chart_midi_file = "res://Sounds/tetrisTheme.mid"
+note_scene = ExtResource("2_note")
+midi_channel = 0
+audio_delay_seconds = 1.85
+audio_player_paths = Array[NodePath]([NodePath("MidiPlayer")])
+midi_notes = PackedInt32Array(68, 69, 71, 72, 74, 76, 77, 79, 80, 81)
+lane_actions = PackedStringArray("d", "f", "j", "k", "l", "d", "f", "j", "k", "k")

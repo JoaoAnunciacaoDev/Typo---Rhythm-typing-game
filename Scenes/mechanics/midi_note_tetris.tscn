@@ -6,9 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cnfs1j0n8kp66" path="res://Assets/tetris/smashboy.png" id="7_8te27"]
 [ext_resource type="Texture2D" uid="uid://bx2idkevgr8f7" path="res://Assets/tetris/teewee.png" id="8_7ghvg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nndsg"]
-size = Vector2(31.7808, 21.6438)
-
 [node name="MidiNote" type="Sprite2D" unique_id=1774115882 node_paths=PackedStringArray("sprite")]
 scale = Vector2(3.65, 3.65)
 script = ExtResource("1_fyb14")
@@ -16,17 +13,7 @@ muranga_key = true
 textures = Array[Texture2D]([ExtResource("7_8te27"), ExtResource("3_a3aqr"), ExtResource("8_7ghvg"), ExtResource("2_wujyt")])
 sprite = NodePath("Sprite2D")
 
-[node name="areaDetect" type="Area2D" parent="." unique_id=1740056072]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect" unique_id=1239136997]
-position = Vector2(0, 0.136986)
-shape = SubResource("RectangleShape2D_nndsg")
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2073576384]
 position = Vector2(0, 0.273973)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_8te27")
-
-[connection signal="area_entered" from="areaDetect" to="." method="_on_area_detect_area_entered"]
