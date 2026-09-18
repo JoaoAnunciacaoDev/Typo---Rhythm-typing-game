@@ -1,5 +1,7 @@
 # Typo
 
+![Ícone do Typo](Assets/resetButton.png)
+
 **Typo** é um jogo de ritmo e digitação desenvolvido em Godot. Notas geradas a partir de arquivos MIDI descem por seis trilhas, e o jogador precisa pressionar as teclas configuradas no momento correto.
 
 O projeto inclui três músicas/fases:
