@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://tstpoxs2oyqv"]
+[gd_scene format=3 uid="uid://tstpoxs2oyqv"]
 
-[ext_resource type="Script" path="res://MainMenu/lvl_select_menu.gd" id="1_5j35g"]
+[ext_resource type="Script" uid="uid://cpoaousnw7x26" path="res://MainMenu/lvl_select_menu.gd" id="1_5j35g"]
 [ext_resource type="PackedScene" uid="uid://bc7dcs0xst3e5" path="res://Scenes/background_hack.tscn" id="2_dyrch"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ocp3"]
@@ -19,7 +19,23 @@ Button/colors/font_color = Color(0.360784, 0.552941, 0.32549, 1)
 Button/styles/hover = SubResource("StyleBoxFlat_3ocp3")
 Button/styles/normal = SubResource("StyleBoxFlat_tmeyg")
 
-[node name="LvlMenu" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_key_panel"]
+content_margin_left = 36.0
+content_margin_top = 28.0
+content_margin_right = 36.0
+content_margin_bottom = 28.0
+bg_color = Color(0.015, 0.025, 0.018, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="LvlMenu" type="Control" unique_id=763641455]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,12 +44,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5j35g")
 
-[node name="BackgroundHack" parent="." instance=ExtResource("2_dyrch")]
+[node name="BackgroundHack" parent="." unique_id=1725142150 instance=ExtResource("2_dyrch")]
 z_index = -1
 position = Vector2(951, 541)
 scale = Vector2(2.702, 2.719)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1471694171]
 z_index = -1
 layout_mode = 0
 offset_left = 172.0
@@ -41,10 +57,10 @@ offset_top = 91.0
 offset_right = 1515.0
 offset_bottom = 1017.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=38879650]
 layout_mode = 2
 
-[node name="fase1" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="fase1" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1969425221]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 3
@@ -52,26 +68,152 @@ theme = SubResource("Theme_j2h0i")
 theme_override_font_sizes/font_size = 69
 text = "Muranga"
 
-[node name="fase2" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="fase2" type="Button" parent="CenterContainer/VBoxContainer" unique_id=18442818]
 layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_j2h0i")
 theme_override_font_sizes/font_size = 69
 text = "Tetris"
 
-[node name="fase3" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="fase3" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1573972085]
 layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_j2h0i")
 theme_override_font_sizes/font_size = 69
 text = "Hacker"
 
-[node name="voltar" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="voltar" type="Button" parent="CenterContainer/VBoxContainer" unique_id=599682824]
 layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_j2h0i")
 theme_override_font_sizes/font_size = 69
 text = "Voltar"
+
+[node name="KeySelection" type="Control" parent="." unique_id=154873983]
+visible = false
+z_index = -1
+anchors_preset = 0
+offset_left = 172.0
+offset_top = 91.0
+offset_right = 1515.0
+offset_bottom = 1017.0
+
+[node name="Shade" type="ColorRect" parent="KeySelection" unique_id=49224035]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.78)
+
+[node name="CenterContainer" type="CenterContainer" parent="KeySelection" unique_id=758506507]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="KeySelection/CenterContainer" unique_id=1090491682]
+custom_minimum_size = Vector2(850, 680)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_key_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="KeySelection/CenterContainer/PanelContainer" unique_id=401655422]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="SongLabel" type="Label" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer" unique_id=1631424754]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.360784, 0.8, 0.32549, 1)
+theme_override_font_sizes/font_size = 42
+text = "Teclas para a partida"
+horizontal_alignment = 1
+
+[node name="Instructions" type="Label" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer" unique_id=440035522]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.88, 0.82, 1)
+theme_override_font_sizes/font_size = 22
+text = "Escolha uma trilha e pressione a tecla que deseja usar."
+horizontal_alignment = 1
+
+[node name="Bindings" type="GridContainer" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer" unique_id=2037491875]
+custom_minimum_size = Vector2(760, 330)
+layout_mode = 2
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 14
+columns = 3
+
+[node name="BindS" type="Button" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer/Bindings" unique_id=735452058]
+custom_minimum_size = Vector2(370, 90)
+layout_mode = 2
+theme = SubResource("Theme_j2h0i")
+theme_override_font_sizes/font_size = 25
+text = "Trilha 1: S"
+
+[node name="BindD" type="Button" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer/Bindings" unique_id=541534164]
+custom_minimum_size = Vector2(370, 90)
+layout_mode = 2
+theme = SubResource("Theme_j2h0i")
+theme_override_font_sizes/font_size = 25
+text = "Trilha 2: D"
+
+[node name="BindF" type="Button" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer/Bindings" unique_id=1242448599]
+custom_minimum_size = Vector2(370, 90)
+layout_mode = 2
+theme = SubResource("Theme_j2h0i")
+theme_override_font_sizes/font_size = 25
+text = "Trilha 3: F"
+
+[node name="BindJ" type="Button" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer/Bindings" unique_id=128870436]
+custom_minimum_size = Vector2(370, 90)
+layout_mode = 2
+theme = SubResource("Theme_j2h0i")
+theme_override_font_sizes/font_size = 25
+text = "Trilha 4: J"
+
+[node name="BindK" type="Button" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer/Bindings" unique_id=1585660754]
+custom_minimum_size = Vector2(370, 90)
+layout_mode = 2
+theme = SubResource("Theme_j2h0i")
+theme_override_font_sizes/font_size = 25
+text = "Trilha 5: K"
+
+[node name="BindL" type="Button" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer/Bindings" unique_id=1497958678]
+custom_minimum_size = Vector2(370, 90)
+layout_mode = 2
+theme = SubResource("Theme_j2h0i")
+theme_override_font_sizes/font_size = 25
+text = "Trilha 6: L"
+
+[node name="BindingStatus" type="Label" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer" unique_id=1796771605]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.86, 0.76, 1)
+theme_override_font_sizes/font_size = 19
+text = "Clique em uma trilha e aperte a tecla desejada."
+horizontal_alignment = 1
+
+[node name="Actions" type="HBoxContainer" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer" unique_id=2048256226]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Cancelar" type="Button" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer/Actions" unique_id=60684814]
+custom_minimum_size = Vector2(240, 72)
+layout_mode = 2
+theme = SubResource("Theme_j2h0i")
+theme_override_font_sizes/font_size = 27
+text = "Cancelar"
+
+[node name="Iniciar" type="Button" parent="KeySelection/CenterContainer/PanelContainer/VBoxContainer/Actions" unique_id=1240547068]
+custom_minimum_size = Vector2(240, 72)
+layout_mode = 2
+theme = SubResource("Theme_j2h0i")
+theme_override_font_sizes/font_size = 27
+text = "Iniciar"
 
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/fase1" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/fase1" to="." method="_on_fase_1_pressed"]
@@ -81,3 +223,5 @@ text = "Voltar"
 [connection signal="pressed" from="CenterContainer/VBoxContainer/fase3" to="." method="_on_fase_3_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/voltar" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/voltar" to="." method="_on_voltar_pressed"]
+[connection signal="pressed" from="KeySelection/CenterContainer/PanelContainer/VBoxContainer/Actions/Cancelar" to="." method="_on_cancelar_pressed"]
+[connection signal="pressed" from="KeySelection/CenterContainer/PanelContainer/VBoxContainer/Actions/Iniciar" to="." method="_on_iniciar_pressed"]

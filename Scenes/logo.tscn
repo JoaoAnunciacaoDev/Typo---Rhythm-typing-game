@@ -1,7 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvu3f84jl8xod"]
+[gd_scene format=3 uid="uid://cvu3f84jl8xod"]
 
-[ext_resource type="Script" path="res://Scripts/logo.gd" id="1_yobpc"]
+[ext_resource type="Script" uid="uid://b4bji1my1je3s" path="res://Scripts/logo.gd" id="1_yobpc"]
 [ext_resource type="Texture2D" uid="uid://bhibrwrtdpyrv" path="res://Assets/LogoLigaDeJogos.png" id="2_e0f86"]
+
+[sub_resource type="Animation" id="Animation_dbtrf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/TextureRect:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1000)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_o3txa"]
 resource_name = "scaling"
@@ -31,40 +58,13 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_dbtrf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CenterContainer/TextureRect:custom_minimum_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 1000)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CenterContainer/TextureRect:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tirsx"]
 _data = {
-"RESET": SubResource("Animation_dbtrf"),
-"scaling": SubResource("Animation_o3txa")
+&"RESET": SubResource("Animation_dbtrf"),
+&"scaling": SubResource("Animation_o3txa")
 }
 
-[node name="Logo" type="Control"]
+[node name="Logo" type="Control" unique_id=1766827510]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,7 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yobpc")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1292178309]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -87,17 +87,15 @@ offset_bottom = 508.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+[node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=138412941]
 custom_minimum_size = Vector2(0, 1000)
 layout_mode = 2
 texture = ExtResource("2_e0f86")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_tirsx")
-}
-autoplay = "scaling"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=583000338]
+libraries/ = SubResource("AnimationLibrary_tirsx")
+autoplay = &"scaling"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

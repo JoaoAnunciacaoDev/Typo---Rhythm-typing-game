@@ -1,66 +1,32 @@
-[gd_scene load_steps=11 format=3 uid="uid://biywn4b8dllub"]
+[gd_scene format=3 uid="uid://biywn4b8dllub"]
 
-[ext_resource type="Script" path="res://Scripts/midi_note.gd" id="1_fyb14"]
+[ext_resource type="Script" uid="uid://xn44vxwocwx8" path="res://Scripts/midi_note.gd" id="1_fyb14"]
 [ext_resource type="Texture2D" uid="uid://bjyh5q01wjcdy" path="res://Assets/tetris/clevelandZ.png" id="2_wujyt"]
 [ext_resource type="Texture2D" uid="uid://fkxibijpbeww" path="res://Assets/tetris/hero.png" id="3_a3aqr"]
-[ext_resource type="Texture2D" uid="uid://c0a2cm2pn01gf" path="res://Assets/tetris/orangeRicky.png" id="4_sjuc8"]
-[ext_resource type="Texture2D" uid="uid://cd65khys00wat" path="res://Assets/tetris/pinkRicky.png" id="5_1xtk5"]
-[ext_resource type="Texture2D" uid="uid://m4efdrwhfq62" path="res://Assets/tetris/rhodeIslandZ.png" id="6_4hfsr"]
 [ext_resource type="Texture2D" uid="uid://cnfs1j0n8kp66" path="res://Assets/tetris/smashboy.png" id="7_8te27"]
 [ext_resource type="Texture2D" uid="uid://bx2idkevgr8f7" path="res://Assets/tetris/teewee.png" id="8_7ghvg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nndsg"]
 size = Vector2(31.7808, 21.6438)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_5p5ad"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_wujyt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_a3aqr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_sjuc8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_1xtk5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_4hfsr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_8te27")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_7ghvg")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 4.0
-}]
-
-[node name="MidiNote" type="Sprite2D"]
+[node name="MidiNote" type="Sprite2D" unique_id=1774115882 node_paths=PackedStringArray("sprite")]
 scale = Vector2(3.65, 3.65)
 script = ExtResource("1_fyb14")
 muranga_key = true
+textures = Array[Texture2D]([ExtResource("7_8te27"), ExtResource("3_a3aqr"), ExtResource("8_7ghvg"), ExtResource("2_wujyt")])
+sprite = NodePath("Sprite2D")
 
-[node name="areaDetect" type="Area2D" parent="."]
+[node name="areaDetect" type="Area2D" parent="." unique_id=1740056072]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect" unique_id=1239136997]
 position = Vector2(0, 0.136986)
 shape = SubResource("RectangleShape2D_nndsg")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2073576384]
 position = Vector2(0, 0.273973)
 scale = Vector2(0.6, 0.6)
-sprite_frames = SubResource("SpriteFrames_5p5ad")
-animation = &"idle"
-autoplay = "idle"
-frame = 5
-frame_progress = 0.849502
+texture = ExtResource("7_8te27")
 
 [connection signal="area_entered" from="areaDetect" to="." method="_on_area_detect_area_entered"]

@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3k7c4qkutagm"]
+[gd_scene format=3 uid="uid://c3k7c4qkutagm"]
 
-[ext_resource type="Shader" path="res://Scripts/transition.gdshader" id="1_dnhfh"]
-[ext_resource type="Script" path="res://Scripts/transition.gd" id="1_hlji0"]
+[ext_resource type="Shader" uid="uid://clu51p2sypsbo" path="res://Scripts/transition.gdshader" id="1_dnhfh"]
+[ext_resource type="Script" uid="uid://ss1h56qmn4xn" path="res://Scripts/transition.gd" id="1_hlji0"]
 [ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="3_7yksb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xa86y"]
@@ -60,15 +60,15 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oqkt8"]
 _data = {
-"RESET": SubResource("Animation_wyuuc"),
-"fade_in": SubResource("Animation_q4txn"),
-"fade_out": SubResource("Animation_d0ehc")
+&"RESET": SubResource("Animation_wyuuc"),
+&"fade_in": SubResource("Animation_q4txn"),
+&"fade_out": SubResource("Animation_d0ehc")
 }
 
-[node name="Transition" type="Node2D"]
+[node name="Transition" type="Node2D" unique_id=1462353263]
 script = ExtResource("1_hlji0")
 
-[node name="Fill" type="ColorRect" parent="."]
+[node name="Fill" type="ColorRect" parent="." unique_id=1513502085]
 material = SubResource("ShaderMaterial_xa86y")
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,12 +82,10 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0, 0, 0, 1)
 
-[node name="anim" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_oqkt8")
-}
+[node name="anim" type="AnimationPlayer" parent="." unique_id=1437633701]
+libraries/ = SubResource("AnimationLibrary_oqkt8")
 speed_scale = 1.25
 
-[node name="Background" parent="." instance=ExtResource("3_7yksb")]
+[node name="Background" parent="." unique_id=1927755902 instance=ExtResource("3_7yksb")]
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

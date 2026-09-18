@@ -4,6 +4,10 @@ extends Sprite2D
 @export var key : String
 @export var muranga_key : bool
 @export var label : Label
+@export var textures : Array[Texture2D]
+@export var sprite : Sprite2D
+@export var animate_textures := false
+@export_range(1.0, 30.0, 0.5) var texture_fps := 8.0
 
 var state : String = ""
 var error_margin : float = 0.25
@@ -11,10 +15,18 @@ var missed : bool = false
 var tutorialNote : bool = false
 var inHitZone : bool = false
 var speed = abs(-40.0 - 500.0) 
+var texture_frame := 0
+var texture_elapsed := 0.0
 
 var abc_lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 func _ready() -> void:
+	if not textures.is_empty() and is_instance_valid(sprite):
+		if animate_textures:
+			sprite.texture = textures[texture_frame]
+		else:
+			sprite.texture = textures.pick_random()
+
 	if not muranga_key:
 		abc_lower.shuffle()
 		letters_random()
@@ -27,6 +39,8 @@ func letters_random() -> void:
 	letters_random()
 
 func _physics_process(delta: float) -> void:
+	_update_texture_animation(delta)
+
 	if state == "hit": # Caso o jogador acerte, a nota é removida da cena
 		queue_free()
 	
@@ -35,6 +49,18 @@ func _physics_process(delta: float) -> void:
 	
 	# node start position - position of button to match (???) Deus sabe o que faz
 	global_position.y += delta * speed
+
+
+func _update_texture_animation(delta: float) -> void:
+	if not animate_textures or textures.size() < 2 or not is_instance_valid(sprite):
+		return
+
+	texture_elapsed += delta
+	var frame_duration := 1.0 / texture_fps
+	while texture_elapsed >= frame_duration:
+		texture_elapsed -= frame_duration
+		texture_frame = (texture_frame + 1) % textures.size()
+		sprite.texture = textures[texture_frame]
 	
 func test_hit(time: float) -> bool: # Testa se o jogador acertou dentro da margem de erro
 	if abs(expected_time - time) < error_margin:
