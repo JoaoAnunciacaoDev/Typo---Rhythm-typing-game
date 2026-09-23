@@ -8,5 +8,5 @@ script = ExtResource("1_song")
 chart_midi_file = "res://Sounds/hackerTheme.mid"
 note_scene = ExtResource("2_note")
 audio_player_paths = Array[NodePath]([NodePath("MidiPlayer")])
-midi_notes = PackedInt32Array(15, 85, 87, 88, 90, 92, 93)
-lane_actions = PackedStringArray("s", "d", "f", "j", "k", "l", "k")
+midi_notes = PackedInt32Array(85, 87, 88, 90, 92, 93)
+lane_actions = PackedStringArray("s", "d", "f", "j", "k", "l")

@@ -24,3 +24,22 @@ Para adicionar uma música:
 3. Crie uma cena herdada de `Scenes/gameplay_base.tscn`.
 4. Atribua `song_data` no nó raiz.
 5. Monte na cena os players audíveis listados em `audio_player_paths` e os visuais exclusivos da música.
+
+## Descobrindo as notas de um MIDI
+
+O utilitário GDScript `tools/list_midi_notes.gd` lista as notas usadas em cada canal e
+gera o `PackedInt32Array` pronto para copiar para `midi_notes`:
+
+```powershell
+godot --headless --path . --script res://tools/list_midi_notes.gd -- Sounds/tetrisTheme.mid
+```
+
+Para inspecionar somente o canal configurado no `SongData`, use `--channel` (os canais
+MIDI são numerados de 0 a 15):
+
+```powershell
+godot --headless --path . --script res://tools/list_midi_notes.gd -- --channel 1 Sounds/Muranga/murangaMelodiaPrincipal.mid
+```
+
+Também é possível informar vários arquivos no mesmo comando. O número de ocorrências
+ajuda a decidir como distribuir as notas entre as ações de `lane_actions`.
