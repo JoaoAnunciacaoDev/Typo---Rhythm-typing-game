@@ -1,9 +1,11 @@
 extends Control
 
 @onready var full_screen_check_box: CheckButton = $CenterContainer/VBoxContainer/FullScreenCheckBox
+@onready var crt_check_box: CheckButton = $CenterContainer/VBoxContainer/CRTCheckBox
 
 func _ready() -> void:
 	full_screen_check_box.set_pressed_no_signal(Settings.fullscreen)
+	crt_check_box.set_pressed_no_signal(Settings.crt_effect)
 	Transition.play_fade_out()
 
 func _on_voltar_pressed() -> void:
@@ -14,6 +16,10 @@ func _on_voltar_pressed() -> void:
 func _on_full_screen_check_box_toggled(_toggled_on) -> void:
 	TocadorSom.play_sfx("click")
 	Settings.set_fullscreen(_toggled_on)
+
+func _on_crt_effect_check_box_toggled(_toggled_on) -> void:
+	TocadorSom.play_sfx("click")
+	Settings.set_crt_effect(_toggled_on)
 
 func _on_mouse_entered() -> void:
 	TocadorSom.play_sfx("btn_hover")

@@ -16,40 +16,6 @@ font_color = Color(0.360784, 0.552941, 0.32549, 1)
 
 [sub_resource type="Theme" id="Theme_2qh16"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0fei"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.360784, 0.552941, 0.32549, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4miby"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.360784, 0.552941, 0.32549, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5qfj"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b81jb"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.360784, 0.552941, 0.32549, 1)
-
-[sub_resource type="Theme" id="Theme_n7grb"]
-Button/colors/font_color = Color(0.360784, 0.552941, 0.32549, 1)
-Button/styles/hover = SubResource("StyleBoxFlat_w0fei")
-Button/styles/hover_pressed = SubResource("StyleBoxFlat_4miby")
-Button/styles/normal = SubResource("StyleBoxFlat_f5qfj")
-Button/styles/pressed = SubResource("StyleBoxFlat_b81jb")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6isyc"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -112,6 +78,40 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w0fei"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4miby"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5qfj"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b81jb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.552941, 0.32549, 1)
+
+[sub_resource type="Theme" id="Theme_n7grb"]
+Button/colors/font_color = Color(0.360784, 0.552941, 0.32549, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_w0fei")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_4miby")
+Button/styles/normal = SubResource("StyleBoxFlat_f5qfj")
+Button/styles/pressed = SubResource("StyleBoxFlat_b81jb")
 
 [node name="ConfigMenu" type="Control" unique_id=1857523889]
 layout_mode = 3
@@ -183,6 +183,26 @@ offset_bottom = 93.0
 mouse_filter = 1
 color = Color(0, 0, 0, 1)
 
+[node name="CRTCheckBox" type="CheckButton" parent="CenterContainer/VBoxContainer" unique_id=1793900385]
+custom_minimum_size = Vector2(511, 95)
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_6lalw")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_b073j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cy0px")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_etq20")
+text = "Efeito CRT"
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/VBoxContainer/CRTCheckBox" unique_id=536675600]
+z_index = -3
+layout_mode = 0
+offset_right = 503.0
+offset_bottom = 93.0
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
 [node name="Voltar" type="Button" parent="CenterContainer/VBoxContainer" unique_id=81566555]
 custom_minimum_size = Vector2(511, 95)
 layout_mode = 2
@@ -194,5 +214,7 @@ text = "Voltar"
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/HSlider" to="." method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/FullScreenCheckBox" to="." method="_on_mouse_entered"]
 [connection signal="toggled" from="CenterContainer/VBoxContainer/FullScreenCheckBox" to="." method="_on_full_screen_check_box_toggled"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CRTCheckBox" to="." method="_on_mouse_entered"]
+[connection signal="toggled" from="CenterContainer/VBoxContainer/CRTCheckBox" to="." method="_on_crt_effect_check_box_toggled"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Voltar" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Voltar" to="." method="_on_voltar_pressed"]

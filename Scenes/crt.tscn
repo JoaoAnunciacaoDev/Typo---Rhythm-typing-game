@@ -22,7 +22,7 @@ shader_parameter/scanline_thickness = 3.0
 shader_parameter/chromatic_aberration_strength = 2.0
 shader_parameter/wiggle = 0.002
 
-[node name="ColorRect" type="ColorRect"]
+[node name="ColorRect" type="ColorRect" groups=["crt_effect"]]
 z_index = 1
 z_as_relative = false
 material = SubResource("ShaderMaterial_2ixa7")

@@ -2,7 +2,6 @@
 
 [ext_resource type="Shader" uid="uid://clu51p2sypsbo" path="res://Scripts/transition.gdshader" id="1_dnhfh"]
 [ext_resource type="Script" uid="uid://ss1h56qmn4xn" path="res://Scripts/transition.gd" id="1_hlji0"]
-[ext_resource type="PackedScene" uid="uid://dkjpadkhggrx3" path="res://Scenes/background.tscn" id="3_7yksb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xa86y"]
 shader = ExtResource("1_dnhfh")
@@ -85,7 +84,5 @@ color = Color(0, 0, 0, 1)
 [node name="anim" type="AnimationPlayer" parent="." unique_id=1437633701]
 libraries/ = SubResource("AnimationLibrary_oqkt8")
 speed_scale = 1.25
-
-[node name="Background" parent="." unique_id=1927755902 instance=ExtResource("3_7yksb")]
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

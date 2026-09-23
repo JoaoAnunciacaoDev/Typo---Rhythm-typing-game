@@ -14,17 +14,20 @@ const DEFAULT_BINDINGS := {
 
 var fullscreen := true
 var master_volume := 1.0
+var crt_effect := true
 var bindings: Dictionary = {}
 
 
 func _ready() -> void:
 	_load_settings()
 	apply_all()
+	call_deferred("_apply_crt_effect")
 
 
 func apply_all() -> void:
 	_apply_fullscreen()
 	_apply_volume()
+	_apply_crt_effect()
 	_apply_bindings()
 
 
@@ -37,6 +40,12 @@ func set_fullscreen(enabled: bool) -> void:
 func set_master_volume(value: float) -> void:
 	master_volume = clampf(value, 0.0, 1.0)
 	_apply_volume()
+	save()
+
+
+func set_crt_effect(enabled: bool) -> void:
+	crt_effect = enabled
+	_apply_crt_effect()
 	save()
 
 
@@ -74,6 +83,7 @@ func save() -> void:
 		"version": SAVE_VERSION,
 		"fullscreen": fullscreen,
 		"master_volume": master_volume,
+		"crt_effect": crt_effect,
 		"bindings": bindings,
 	}, true)
 
@@ -97,6 +107,7 @@ func _load_settings() -> void:
 	var stored: Dictionary = stored_value
 	fullscreen = bool(stored.get("fullscreen", true))
 	master_volume = clampf(float(stored.get("master_volume", 1.0)), 0.0, 1.0)
+	crt_effect = bool(stored.get("crt_effect", true))
 	var stored_bindings: Variant = stored.get("bindings", {})
 	if stored_bindings is Dictionary:
 		for action in INPUT_ACTIONS:
@@ -114,6 +125,11 @@ func _apply_volume() -> void:
 	var bus_index := AudioServer.get_bus_index("Master")
 	if bus_index >= 0:
 		AudioServer.set_bus_volume_db(bus_index, linear_to_db(master_volume))
+
+
+func _apply_crt_effect() -> void:
+	for crt: CanvasItem in get_tree().get_nodes_in_group(&"crt_effect"):
+		crt.visible = crt_effect
 
 
 func _apply_bindings() -> void:
